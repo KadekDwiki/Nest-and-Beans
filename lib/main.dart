@@ -27,6 +27,8 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const MyHomePage(),
+      //home: const PurchaseHistory(),
+      //home: const PaymentSuccessScreen(),
     );
   }
 }
