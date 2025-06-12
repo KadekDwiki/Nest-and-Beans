@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nest_and_beans/purchase_history.dart';
+import 'product_detail.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +28,8 @@ class MyApp extends StatelessWidget {
           secondary: Color.fromRGBO(117, 117, 117, 0.7),
         ),
       ),
-      home: const MyHomePage(),
+      // home: const MyHomePage(),
+      home: const PurchaseHistory(),
     );
   }
 }
