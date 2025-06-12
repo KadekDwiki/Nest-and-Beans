@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'Model/purchase.dart';
+import '/Model/purchase.dart';
+import 'detail_purchase.dart';
 
 class PurchaseHistory extends StatelessWidget {
   const PurchaseHistory({super.key});
@@ -55,7 +56,13 @@ class PurchaseHistory extends StatelessWidget {
 
                     InkWell(
                       onTap: () {
-                        // Aksi
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                DetailPurchase(purchase: purchase),
+                          ),
+                        );
                       },
                       child: Row(
                         children: const [
@@ -118,7 +125,7 @@ class PurchaseHistory extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        // aksi
+                        // Aksi
                       },
                       child: const Text(
                         'PESAN LAGI',
