@@ -6,9 +6,16 @@ class PurchaseHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorscheme = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: AppBar(title: const Text('Riwayat Pemesanan'), centerTitle: true),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF185221),
+        centerTitle: true,
+        title: const Text(
+          'Riwayat Pemesanan',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
+
       body: ListView.builder(
         itemCount: purchaseHistory.length,
         itemBuilder: (context, index) {
