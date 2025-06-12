@@ -35,7 +35,7 @@ final List<Product> productLists = [
     description:
         'Perpaduan sempurna antara espresso, susu hangat, dan sirup karamel yang manis. Cocok untuk penikmat kopi ringan.',
     category: 'Milk-Based',
-    imageCover: 'assets/images/caramel-latte.jpg',
+    imageCover: 'assets/images/cappucino-latte.jpg',
     imagesSlider: [
       'assets/images/caramel-latte-1.jpg',
       'assets/images/caramel-latte-2.jpg',
@@ -71,7 +71,7 @@ final List<Product> productLists = [
     description:
         'Kopi seduh dingin yang disimpan selama 18 jam untuk rasa yang lebih halus dan rendah asam.',
     category: 'Cold Brew',
-    imageCover: 'assets/images/cold-brew.jpg',
+    imageCover: 'assets/images/cold_brew_signature.jpg',
     imagesSlider: [
       'assets/images/cold-brew-1.jpg',
       'assets/images/cold-brew-2.jpg',
@@ -89,7 +89,7 @@ final List<Product> productLists = [
     description:
         'Cappuccino creamy dengan sentuhan rasa hazelnut yang lembut dan aroma menggoda.',
     category: 'Milk-Based',
-    imageCover: 'assets/images/hazelnut-cappuccino.jpg',
+    imageCover: 'assets/images/hazlenut_latte.jpg',
     imagesSlider: [
       'assets/images/hazelnut-cappuccino-1.jpg',
       'assets/images/hazelnut-cappuccino-2.jpg',
