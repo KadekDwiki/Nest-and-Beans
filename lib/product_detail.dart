@@ -12,88 +12,158 @@ class ProductDetail extends StatefulWidget {
 
 class _ProductDetailState extends State<ProductDetail> {
   String? selectedSize;
+  int quantity = 1;
 
   @override
   Widget build(BuildContext context) {
     final product = widget.product;
+    final double totalPrice = product.price * quantity;
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+        title: const Text(
+          'Detail Produk',
+          style: TextStyle(color: Colors.white),
+          textAlign: TextAlign.center,
+        ),
+        backgroundColor: Color(0xFF185221),
+        elevation: 1,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Gambar produk
+            Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
                 child: Image.asset(
                   product.imageCover,
-                  height: 200.0,
+                  height: 550,
+                  width: double.infinity,
                   fit: BoxFit.cover,
                 ),
               ),
-              const SizedBox(height: 16),
-              Text(
-                product.name,
-                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 20),
+
+            // Nama dan deskripsi
+            Text(
+              product.name,
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              product.description,
+              style: const TextStyle(color: Colors.grey),
+            ),
+            const SizedBox(height: 12),
+
+            // Harga
+            Text(
+              'Rp ${product.price.toStringAsFixed(0)}',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 20),
+
+            // Pilihan ukuran
+            const Text(
+              'Pilih Ukuran Cup:',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            Column(
+              children: product.sizes.map((size) {
+                return RadioListTile<String>(
+                  title: Text(size),
+                  value: size,
+                  groupValue: selectedSize,
+                  onChanged: (value) {
+                    setState(() {
+                      selectedSize = value!;
+                    });
+                  },
+                );
+              }).toList(),
+            ),
+
+            // Notifikasi jika tidak tersedia
+            if (!product.isAvailable)
+              const Text(
+                'Tidak tersedia saat ini',
+                style: TextStyle(color: Colors.red),
               ),
-              Text(
-                product.category,
-                style: TextStyle(color: Colors.grey),
-              ),
-              const SizedBox(height: 8),
-              Text(product.description),
-              const SizedBox(height: 16),
-              Text('Harga: Rp${product.price.toStringAsFixed(0)}',
-                  style: const TextStyle(fontWeight: FontWeight.bold)),
-              const SizedBox(height: 16),
-              Text('Pilih Ukuran:', style: const TextStyle(fontWeight: FontWeight.bold)),
-              Column(
-                children: product.sizes.map((size) {
-                  return Row(
-                    children: [
-                      Radio<String>(
-                        value: size,
-                        groupValue: selectedSize,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedSize = value!;
-                          });
-                        },
-                      ),
-                      Text(size),
-                    ],
-                  );
-                }).toList(),
-              ),
-              const SizedBox(height: 16),
-              if (!product.isAvailable)
-                const Text('Tidak tersedia saat ini',
-                    style: TextStyle(color: Colors.red)),
-              if (product.isAvailable)
-                Center(
-                  child: ElevatedButton(
+
+            const SizedBox(
+              height: 80,
+            ), // Untuk memberi jarak agar tombol tidak tertutup
+          ],
+        ),
+      ),
+
+      // Tombol beli di bawah
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border(top: BorderSide(color: Colors.grey.shade300)),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Tombol + -
+              Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.remove),
                     onPressed: () {
-                      // aksi beli
+                      if (quantity > 1) {
+                        setState(() {
+                          quantity--;
+                        });
+                      }
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF185221),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 40, vertical: 12),
-                    ),
-                    child: const Text('Beli Sekarang'),
+                  ),
+                  Text('$quantity', style: const TextStyle(fontSize: 16)),
+                  IconButton(
+                    icon: const Icon(Icons.add),
+                    onPressed: () {
+                      setState(() {
+                        quantity++;
+                      });
+                    },
+                  ),
+                ],
+              ),
+
+              // Tombol beli
+              ElevatedButton(
+                onPressed: selectedSize == null || !product.isAvailable
+                    ? null
+                    : () {
+                        // aksi beli atau tambah ke keranjang
+                      },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF185221),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 28,
+                    vertical: 12,
                   ),
                 ),
+                child: Text(
+                  'Tambah - Rp ${totalPrice.toStringAsFixed(0)}',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ],
           ),
         ),
