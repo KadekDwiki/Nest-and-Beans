@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nest_and_beans/Model/product.dart';
 import 'package:nest_and_beans/purchase_history.dart';
 import 'product_detail.dart';
-//import 'payment_success.dart';
+import 'payment_success.dart';
 //import 'order_ready.dart';
 
 void main() {
@@ -32,8 +32,8 @@ class MyApp extends StatelessWidget {
         ),
       ),
       // home: const MyHomePage(),
-      home: const PurchaseHistory(),
-      //home: const PaymentSuccessScreen(),
+      //home: const PurchaseHistory(),
+      home: const PaymentSuccessScreen(),
       //home:  ProductDetail(product: productLists[1]),
     );
   }
