@@ -13,6 +13,7 @@ class ProductDetail extends StatefulWidget {
 class _ProductDetailState extends State<ProductDetail> {
   String? selectedSize;
   int quantity = 1;
+  List<String> selectedToppings = [];
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +24,10 @@ class _ProductDetailState extends State<ProductDetail> {
       appBar: AppBar(
         title: const Text(
           'Detail Produk',
-          style: TextStyle(color: Colors.white),
-          textAlign: TextAlign.center,
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         backgroundColor: Color(0xFF185221),
+        centerTitle: true,
         elevation: 1,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -73,24 +74,59 @@ class _ProductDetailState extends State<ProductDetail> {
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
+            const Divider(height: 10, color: Colors.grey),
+            const SizedBox(height: 20),
 
             // Pilihan ukuran
             const Text(
               'Pilih Ukuran Cup:',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            Column(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: product.sizes.map((size) {
-                return RadioListTile<String>(
-                  title: Text(size),
-                  value: size,
-                  groupValue: selectedSize,
-                  onChanged: (value) {
+                return Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Radio<String>(
+                      value: size,
+                      groupValue: selectedSize,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedSize = value!;
+                        });
+                      },
+                    ),
+                    Text(size),
+                    const SizedBox(width: 50), // Jarak antar pilihan
+                  ],
+                );
+              }).toList(),
+            ),
+            const SizedBox(height: 20),
+
+            // Pilihan ukuran
+            const Text(
+              'Pilih Topping:',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: product.toppings.map((topping) {
+                return CheckboxListTile(
+                  title: Text(topping),
+                  value: selectedToppings.contains(topping),
+                  onChanged: (bool? isChecked) {
                     setState(() {
-                      selectedSize = value!;
+                      if (isChecked == true) {
+                        selectedToppings.add(topping);
+                      } else {
+                        selectedToppings.remove(topping);
+                      }
                     });
                   },
+                  controlAffinity: ListTileControlAffinity.leading,
                 );
               }).toList(),
             ),
