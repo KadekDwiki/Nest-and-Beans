@@ -75,73 +75,123 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
           ),
-          ...connectedPayments.map((method) => buildPaymentOption(method)),
-
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-              'Metode Pembayaran Lainnya',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                ...connectedPayments.map(
+                  (method) => buildPaymentOption(method),
+                ),
+              ],
             ),
           ),
-          ...otherPayments.map((method) => buildOtherPayment(method)),
+
+          Container(
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(color: Colors.grey.shade300, width: 4),
+              ),
+            ),
+            child: const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'Metode Pembayaran Lainnya',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                ...otherPayments.map((method) => buildOtherPayment(method)),
+              ],
+            ),
+          ),
         ],
       ),
     );
   }
 
   Widget buildPaymentOption(Map<String, dynamic> method) {
-    return RadioListTile<String>(
-      value: method['name'],
-      groupValue: selectedMethod,
-      onChanged: (value) {
-        setState(() {
-          selectedMethod = value!;
-        });
-      },
-      title: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(100),
-            child: Image.asset(
-              method['icon'],
-              width: 32,
-              height: 32,
-              fit: BoxFit.cover,
-            ),
-          ),
-          const SizedBox(width: 8),
-          Text(method['name']),
-        ],
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: Colors.grey.shade300, width: 1),
+        ),
       ),
-      subtitle: method['desc'] != null
-          ? Text(method['desc'], style: const TextStyle(color: Colors.green))
-          : method['saldo'] != null
-          ? Text(
-              'Saldo: ${method['saldo']}',
-              style: TextStyle(color: method['saldoColor']),
-            )
-          : null,
+      child: RadioListTile<String>(
+        controlAffinity: ListTileControlAffinity.trailing,
+        value: method['name'],
+        groupValue: selectedMethod,
+        onChanged: (value) {
+          setState(() {
+            selectedMethod = value!;
+          });
+        },
+        title: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: Image.asset(
+                method['icon'],
+                width: 32,
+                height: 32,
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(width: 8),
+            Text(method['name']),
+          ],
+        ),
+        subtitle: method['desc'] != null
+            ? Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Text(
+                  method['desc'],
+                  style: const TextStyle(color: Colors.green),
+                ),
+              )
+            : method['saldo'] != null
+            ? Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Text(
+                  'Saldo: ${method['saldo']}',
+                  style: TextStyle(color: method['saldoColor']),
+                ),
+              )
+            : null,
+      ),
     );
   }
 
   Widget buildOtherPayment(Map<String, dynamic> method) {
-    return ListTile(
-      leading: ClipRRect(
-        borderRadius: BorderRadius.circular(100),
-        child: Image.asset(
-          method['icon'],
-          width: 32,
-          height: 32,
-          fit: BoxFit.cover,
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: Colors.grey.shade300, width: 1),
         ),
       ),
-      title: Text(method['name']),
-      trailing: Text(
-        method['action'],
-        style: const TextStyle(color: Colors.green),
+      child: ListTile(
+        leading: ClipRRect(
+          borderRadius: BorderRadius.circular(100),
+          child: Image.asset(
+            method['icon'],
+            width: 32,
+            height: 32,
+            fit: BoxFit.cover,
+          ),
+        ),
+        title: Text(method['name']),
+        trailing: Text(
+          method['action'],
+          style: const TextStyle(color: Colors.green, fontSize: 14),
+        ),
+        onTap: () {},
       ),
-      onTap: () {},
     );
   }
 }
