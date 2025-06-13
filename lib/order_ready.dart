@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import '/Model/product.dart';
+import 'purchase_history.dart';
+import '/Model/purchase.dart';
 
 class OrderReadyScreen extends StatelessWidget {
-  const OrderReadyScreen({super.key});
+  final Purchase purchase;
+
+  const OrderReadyScreen({super.key, required this.purchase});
 
   @override
   Widget build(BuildContext context) {
-    final caramelLatte = productLists.firstWhere(
-      (product) => product.name == 'Caramel Latte',
-    );
     return Scaffold(
       appBar: AppBar(
         title: const Text("Pesanan Siap"),
@@ -29,12 +29,12 @@ class OrderReadyScreen extends StatelessWidget {
             Center(
               child: Column(
                 children: [
-                  const Text(
-                    'ORDER ID : #240712690493',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                  Text(
+                    'ORDER ID : #${purchase.id}',
+                    style: const TextStyle(
+                      fontSize: 14,
                       color: Color(0xFF185221),
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -88,16 +88,16 @@ class OrderReadyScreen extends StatelessWidget {
               leading: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
-                  caramelLatte.imageCover,
+                  purchase.product.imageCover,
                   width: 50,
                   height: 50,
                   fit: BoxFit.cover,
                 ),
               ),
-              title: Text(caramelLatte.name),
+              title: Text(purchase.product.name),
               subtitle: Text(
-                '${caramelLatte.sizes.join(', ')}'
-                '${caramelLatte.toppings.isNotEmpty ? " | ${caramelLatte.toppings.join(', ')}" : ""}',
+                'Size: ${purchase.selectedSize}'
+                '${purchase.product.toppings.isNotEmpty ? " | ${purchase.product.toppings.join(', ')}" : ""}',
               ),
             ),
             const SizedBox(height: 24),
@@ -124,7 +124,7 @@ class OrderReadyScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => const OrderReadyScreen(), //ganti pake punya pyari
+                          builder: (_) => const PurchaseHistory(),
                         ),
                       );
                     },

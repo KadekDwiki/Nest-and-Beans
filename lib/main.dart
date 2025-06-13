@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nest_and_beans/Model/product.dart';
+import 'package:nest_and_beans/purchase_history.dart';
+import 'product_detail.dart';
+import 'payment_success.dart';
 //import 'package:nest_and_beans/purchase_history.dart';
 //import 'product_detail.dart';
 //import 'payment_success.dart';
@@ -31,6 +34,10 @@ class MyApp extends StatelessWidget {
           secondary: Color.fromRGBO(117, 117, 117, 0.7),
         ),
       ),
+      // home: const MyHomePage(),
+      //home: const PurchaseHistory(),
+      //home: const PaymentSuccessScreen(),
+      //home:  ProductDetail(product: productLists[1]),
       home: const MyHomePage(),
       //home: const PurchaseHistory(),
       //home: const PaymentSuccessScreen(),

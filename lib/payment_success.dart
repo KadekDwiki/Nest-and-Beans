@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'order_ready.dart';
+import 'detail_purchase.dart';
+import '/Model/purchase.dart';
 
 class PaymentSuccessScreen extends StatelessWidget {
-  const PaymentSuccessScreen({super.key});
+  final Purchase purchase;
+
+  const PaymentSuccessScreen({super.key, required this.purchase});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +62,9 @@ class PaymentSuccessScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const OrderReadyScreen()), //ganti pake punya pyari nanti
+                  MaterialPageRoute(
+                    builder: (_) => DetailPurchase(purchase: purchase),
+                  ), //ganti pake punya pyari nanti
                 );
               },
               child: const Text("Lihat Detail"),
