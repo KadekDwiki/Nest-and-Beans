@@ -5,6 +5,7 @@ import 'package:nest_and_beans/Model/product.dart';
 import 'package:nest_and_beans/purchase_history.dart';
 import 'product_detail.dart';
 import 'payment_success.dart';
+import 'login.dart';
 //import 'package:nest_and_beans/purchase_history.dart';
 //import 'product_detail.dart';
 //import 'payment_success.dart';
@@ -34,11 +35,12 @@ class MyApp extends StatelessWidget {
           secondary: Color.fromRGBO(117, 117, 117, 0.7),
         ),
       ),
-      // home: const MyHomePage(),
+      home: const MyHomePage(),
       //home: const PurchaseHistory(),
       //home: const PaymentSuccessScreen(),
       //home:  ProductDetail(product: productLists[1]),
-      home: const MyHomePage(),
+      //home: const MyHomePage(),
+      //home: const LoginPage(),
       //home: const PurchaseHistory(),
       //home: const PaymentSuccessScreen(),
       //home:  ProductDetail(product: productLists[0]),
@@ -50,7 +52,7 @@ class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     final colorscheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(title: const Text('Nest & Beans')),
