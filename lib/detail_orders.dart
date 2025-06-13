@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '/Model/purchase.dart';
+import 'order_ready.dart';
 
 class DetailOrders extends StatelessWidget {
   final Purchase purchase;
@@ -149,10 +150,10 @@ class DetailOrders extends StatelessWidget {
                 ),
               ],
             ),
-
+            const SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF185221),
+                backgroundColor: const Color(0xFF185221),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -162,7 +163,12 @@ class DetailOrders extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                // Aksi
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => OrderReadyScreen(purchase: purchase),
+                  ),
+                );
               },
               child: const Text(
                 'AMBIL SEKARANG',

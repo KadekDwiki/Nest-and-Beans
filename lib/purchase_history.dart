@@ -15,6 +15,7 @@ class PurchaseHistory extends StatelessWidget {
           'Riwayat Pemesanan',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
 
       body: ListView.builder(
@@ -90,10 +91,6 @@ class PurchaseHistory extends StatelessWidget {
                 const SizedBox(height: 6),
 
                 // Lokasi & Tanggal
-                Text(
-                  purchase.location,
-                  style: const TextStyle(fontWeight: FontWeight.w500),
-                ),
                 Text(
                   _formatDate(purchase.purchaseDate),
                   style: const TextStyle(color: Colors.black87, fontSize: 13),
