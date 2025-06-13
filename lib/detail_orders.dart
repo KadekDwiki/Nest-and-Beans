@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '/Model/purchase.dart';
+import 'order_ready.dart';
 
 class DetailOrders extends StatelessWidget {
   final Purchase purchase;
@@ -162,7 +163,10 @@ class DetailOrders extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                // Aksi
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => OrderReadyScreen()),
+                );
               },
               child: const Text(
                 'AMBIL SEKARANG',
