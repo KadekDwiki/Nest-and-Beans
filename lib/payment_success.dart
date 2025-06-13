@@ -59,6 +59,30 @@ class PaymentSuccessScreen extends StatelessWidget {
             ),
             const SizedBox(height: 50),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF185221),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => DetailOrders(purchase: purchase),
+                  ),
+                );
+              },
+              child: const Text(
+                'AMBIL SEKARANG',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,

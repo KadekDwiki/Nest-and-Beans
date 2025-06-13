@@ -163,7 +163,12 @@ class DetailOrders extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                // Aksi
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => OrderReadyScreen(purchase: purchase),
+                  ),
+                );
               },
               child: const Text(
                 'AMBIL SEKARANG',
