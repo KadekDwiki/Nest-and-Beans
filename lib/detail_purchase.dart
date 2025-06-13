@@ -10,9 +10,14 @@ class DetailPurchase extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detail Pembelian'),
+        title: const Text(
+          'Detail Pembelian',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
         backgroundColor: const Color(0xFF185221),
+
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
 
       body: SingleChildScrollView(
