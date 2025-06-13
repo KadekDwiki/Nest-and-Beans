@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nest_and_beans/Model/purchase.dart';
+import 'package:nest_and_beans/payment_method.dart';
 
 class OrderPage extends StatelessWidget {
   const OrderPage({super.key});
@@ -8,7 +9,18 @@ class OrderPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorscheme = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: AppBar(title: const Text('Pemesanan')),
+      appBar: AppBar(
+        title: const Text(
+          'Checkout',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -22,8 +34,7 @@ class OrderPage extends StatelessWidget {
                   child: Row(
                     children: [
                       Container(
-                        width: 60,
-                        height: 60,
+                        padding: const EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
@@ -34,7 +45,7 @@ class OrderPage extends StatelessWidget {
                         child: Icon(
                           Icons.local_mall,
                           color: colorscheme.primary,
-                          size: 42,
+                          size: 28,
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -45,7 +56,7 @@ class OrderPage extends StatelessWidget {
                             Text(
                               'Pick Up',
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
                               ),
@@ -84,7 +95,7 @@ class OrderPage extends StatelessWidget {
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: 18,
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -110,7 +121,7 @@ class OrderPage extends StatelessWidget {
                                 Text(
                                   'Pick Up',
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
                                   ),
@@ -159,7 +170,7 @@ class OrderPage extends StatelessWidget {
                         Text(
                           'Detail Pesanan',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                           ),
@@ -207,7 +218,7 @@ class OrderPage extends StatelessWidget {
                             Text(
                               'Eco-friendly Bag',
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
                               ),
@@ -216,7 +227,7 @@ class OrderPage extends StatelessWidget {
                               'Wajib untuk setiap pembelian yang dilakukan',
                               style: TextStyle(
                                 color: colorscheme.secondary,
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ],
@@ -245,7 +256,7 @@ class OrderPage extends StatelessWidget {
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: 18,
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -271,7 +282,7 @@ class OrderPage extends StatelessWidget {
                                 Text(
                                   'Gratis Ongkir',
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
                                   ),
@@ -280,7 +291,7 @@ class OrderPage extends StatelessWidget {
                                   'Voucher gratis ongkir berhasil digunakan',
                                   style: TextStyle(
                                     color: colorscheme.secondary,
-                                    fontSize: 16,
+                                    fontSize: 14,
                                   ),
                                 ),
                               ],
@@ -317,7 +328,7 @@ class OrderPage extends StatelessWidget {
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: 18,
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -344,14 +355,21 @@ class OrderPage extends StatelessWidget {
                             child: Text(
                               'OVO',
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
                               ),
                             ),
                           ),
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const ChoosePaymentMethod(),
+                                ),
+                              );
+                            },
                             icon: Icon(
                               Icons.arrow_forward_ios_rounded,
                               color: colorscheme.primary,
@@ -420,7 +438,7 @@ class OrderPage extends StatelessWidget {
             ),
             child: Text(
               'Lanjutkan',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -437,7 +455,7 @@ class OrderPage extends StatelessWidget {
       onPressed: () {},
       style: TextButton.styleFrom(
         foregroundColor: colorscheme.primary,
-        textStyle: TextStyle(fontSize: 20),
+        textStyle: TextStyle(fontSize: 16),
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(100),
@@ -462,6 +480,7 @@ class OrderPage extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
+              fontSize: 16,
               fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
             ),
           ),
@@ -541,7 +560,7 @@ class ItemCard extends StatelessWidget {
                   Text(
                     purchase.product.name,
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 16,
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                     ),
@@ -550,15 +569,15 @@ class ItemCard extends StatelessWidget {
                   Text(
                     '${purchase.selectedSize} - ${purchase.toppings[0]}',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       color: colorscheme.secondary,
                     ),
                   ),
                 ],
               ),
               SizedBox(
-                height: 80,
-                width: 80,
+                height: 70,
+                width: 70,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Image.asset(
@@ -579,7 +598,7 @@ class ItemCard extends StatelessWidget {
               Text(
                 'Rp ${purchase.product.price.toStringAsFixed(0)}',
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 16,
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
@@ -622,7 +641,7 @@ class _QuantityOrderState extends State<QuantityOrder> {
       children: [
         IconButton(
           color: widget.colorscheme.primary,
-          iconSize: 28,
+          iconSize: 24,
           icon: Icon(Icons.remove_circle_outline),
           onPressed: qty > 1
               ? () {
@@ -635,7 +654,7 @@ class _QuantityOrderState extends State<QuantityOrder> {
         Text('$qty', style: TextStyle(fontSize: 16)),
         IconButton(
           color: widget.colorscheme.primary,
-          iconSize: 28,
+          iconSize: 24,
           icon: Icon(Icons.add_circle_outline),
           onPressed: () {
             setState(() {

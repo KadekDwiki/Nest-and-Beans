@@ -11,7 +11,7 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod> {
   String selectedMethod = 'QRIS';
 
   final List<Map<String, dynamic>> connectedPayments = [
-    {'name': 'QRIS', 'icon': Icons.qr_code},
+    {'name': 'QRIS', 'icon': 'assets/images/qris.png'},
     {
       'name': 'Kartu Kredit',
       'icon': 'assets/images/credit_card.png',
@@ -55,10 +55,15 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pilih Pembayaran'),
+        title: const Text(
+          'Pilih Pembayaran',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
       body: ListView(
