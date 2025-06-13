@@ -165,7 +165,9 @@ class DetailOrders extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => OrderReadyScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => OrderReadyScreen(purchase: purchase),
+                  ),
                 );
               },
               child: const Text(

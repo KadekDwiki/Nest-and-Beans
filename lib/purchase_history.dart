@@ -89,11 +89,7 @@ class PurchaseHistory extends StatelessWidget {
 
                 const SizedBox(height: 6),
 
-                // Lokasi & Tanggal
-                Text(
-                  purchase.location,
-                  style: const TextStyle(fontWeight: FontWeight.w500),
-                ),
+                // Tanggal
                 Text(
                   _formatDate(purchase.purchaseDate),
                   style: const TextStyle(color: Colors.black87, fontSize: 13),
