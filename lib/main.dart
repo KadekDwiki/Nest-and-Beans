@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
           secondary: Color.fromRGBO(80, 80, 80, 0.907),
         ),
       ),
+
       // home: const MyHomePage(),
       //home: const PurchaseHistory(),
       //home: const PaymentSuccessScreen(),
@@ -49,8 +50,7 @@ class MyApp extends StatelessWidget {
       // home: PaymentSuccessScreen(purchase: purchaseHistory[0]),
       //home: const OrderReadyScreen(purchase: PurchaseHistory()[1],),
       //home:  ProductDetail(product: productLists[0]),
-
-      // home: const OrderPage(),
+      home: const OrderPage(),
       // home: const ChoosePaymentMethod(),
     );
   }

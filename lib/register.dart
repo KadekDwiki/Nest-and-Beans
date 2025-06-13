@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'login.dart';
+import 'package:nest_and_beans/login.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+  const RegisterPage({super.key});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -14,7 +14,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _telponController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  
+
   bool _obscureText = true;
 
   void _toggleObscure() {
@@ -48,49 +48,48 @@ class _RegisterPageState extends State<RegisterPage> {
     return regex.hasMatch(password);
   }
 
-  
-
   //logic validasi email dan password
   void _handleRegister() {
     String name = _nameController.text;
     String email = _emailController.text;
     String telpon = _telponController.text;
     String password = _passwordController.text;
-    
 
     if (name.isEmpty || email.isEmpty || password.isEmpty || telpon.isEmpty) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Data belum lengkap")));
+      return;
+    } else if (!isValidGmail(email)) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Email tidak valid")));
+      return;
+    } else if (!isValidPassword(password)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Data belum lengkap")),
+        SnackBar(
+          content: Text(
+            "Password minimal 8 karakter mengandung huruf dan angka",
+          ),
+        ),
       );
       return;
-    }else if (!isValidGmail(email)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Email tidak valid")),
-      );
-      return;
-    }else if (!isValidPassword(password)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Password minimal 8 karakter mengandung huruf dan angka")),
-      );
-      return;
-    }else if (!isValidTelpon(telpon)){
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Nomor Telepon tidak valid")),
-      );
+    } else if (!isValidTelpon(telpon)) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Nomor Telepon tidak valid")));
       return;
     }
 
     // Jika semua validasi lolos
-      Navigator.pushReplacement(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => LoginPage()),
     );
   }
 
-  
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -98,16 +97,15 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               //mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
                 Align(
                   alignment: Alignment.topLeft,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 15),
                     child: IconButton(
-                    iconSize: 30,
+                      iconSize: 30,
                       icon: Icon(
                         CupertinoIcons.chevron_left_circle,
-                        color: Theme.of(context).colorScheme.primary
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                       onPressed: () {
                         Navigator.pushReplacement(
@@ -126,12 +124,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Text(
                       "Daftar",
                       style: TextStyle(
-                        fontSize: 27, 
+                        fontSize: 27,
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
-                  ) 
+                  ),
                 ),
 
                 Align(
@@ -142,10 +140,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       "Buat akunmu dan pilih menu favoritmu",
                       style: TextStyle(
                         fontSize: 12,
-                        color: Theme.of(context).colorScheme.primary
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
-                  ) 
+                  ),
                 ),
 
                 SizedBox(height: 30),
@@ -157,42 +155,42 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Text(
                       "Nama",
                       style: TextStyle(
-                        fontSize: 14, 
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
-                  ) 
+                  ),
                 ),
 
                 SizedBox(
                   height: 30,
                   child: TextField(
                     controller: _nameController,
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
+                    style: TextStyle(fontSize: 14),
                     decoration: InputDecoration(
                       hintText: 'Nama',
                       filled: true,
                       fillColor: Color(0xFFDDDDDD),
                       prefixIcon: Padding(
-                        padding: const EdgeInsets.only(left: 10), // Geser ke kanan
-                        child: Icon(
-                          Icons.person_outline_rounded,
-                          size: 20
-                        ),
+                        padding: const EdgeInsets.only(
+                          left: 10,
+                        ), // Geser ke kanan
+                        child: Icon(Icons.person_outline_rounded, size: 20),
                       ),
 
-                      contentPadding: EdgeInsets.only(left:25),
+                      contentPadding: EdgeInsets.only(left: 25),
 
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xFFDDDDDD), width: 2),
+                        borderSide: BorderSide(
+                          color: Color(0xFFDDDDDD),
+                          width: 2,
+                        ),
                         borderRadius: BorderRadius.circular(40),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(40),
-                        borderSide: BorderSide(color: Color(0xFFDDDDDD))
+                        borderSide: BorderSide(color: Color(0xFFDDDDDD)),
                       ),
                     ),
                   ),
@@ -207,42 +205,42 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Text(
                       "E-mail",
                       style: TextStyle(
-                        fontSize: 14, 
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
-                  ) 
+                  ),
                 ),
 
                 SizedBox(
                   height: 30,
                   child: TextField(
                     controller: _emailController,
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
+                    style: TextStyle(fontSize: 14),
                     decoration: InputDecoration(
                       hintText: 'E-mail',
                       filled: true,
                       fillColor: Color(0xFFDDDDDD),
                       prefixIcon: Padding(
-                        padding: const EdgeInsets.only(left: 10), // Geser ke kanan
-                        child: Icon(
-                          Icons.mail_outline,
-                          size: 20
-                        ),
+                        padding: const EdgeInsets.only(
+                          left: 10,
+                        ), // Geser ke kanan
+                        child: Icon(Icons.mail_outline, size: 20),
                       ),
 
-                      contentPadding: EdgeInsets.only(left:25),
+                      contentPadding: EdgeInsets.only(left: 25),
 
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xFFDDDDDD), width: 2),
+                        borderSide: BorderSide(
+                          color: Color(0xFFDDDDDD),
+                          width: 2,
+                        ),
                         borderRadius: BorderRadius.circular(40),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(40),
-                        borderSide: BorderSide(color: Color(0xFFDDDDDD))
+                        borderSide: BorderSide(color: Color(0xFFDDDDDD)),
                       ),
                     ),
                   ),
@@ -257,43 +255,43 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Text(
                       "Nomor Telepon",
                       style: TextStyle(
-                        fontSize: 14, 
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
-                  ) 
+                  ),
                 ),
 
                 SizedBox(
                   height: 30,
                   child: TextField(
                     controller: _telponController,
-                    keyboardType: TextInputType.number, 
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
+                    keyboardType: TextInputType.number,
+                    style: TextStyle(fontSize: 14),
                     decoration: InputDecoration(
                       hintText: 'Nomor Telepon',
                       filled: true,
                       fillColor: Color(0xFFDDDDDD),
                       prefixIcon: Padding(
-                        padding: const EdgeInsets.only(left: 10), // Geser ke kanan
-                        child: Icon(
-                          Icons.call_outlined,
-                          size: 20
-                        ),
+                        padding: const EdgeInsets.only(
+                          left: 10,
+                        ), // Geser ke kanan
+                        child: Icon(Icons.call_outlined, size: 20),
                       ),
 
-                      contentPadding: EdgeInsets.only(left:25),
+                      contentPadding: EdgeInsets.only(left: 25),
 
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xFFDDDDDD), width: 2),
+                        borderSide: BorderSide(
+                          color: Color(0xFFDDDDDD),
+                          width: 2,
+                        ),
                         borderRadius: BorderRadius.circular(40),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(40),
-                        borderSide: BorderSide(color: Color(0xFFDDDDDD))
+                        borderSide: BorderSide(color: Color(0xFFDDDDDD)),
                       ),
                     ),
                   ),
@@ -308,12 +306,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Text(
                       "Kata Sandi",
                       style: TextStyle(
-                        fontSize: 14, 
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
-                  ) 
+                  ),
                 ),
 
                 SizedBox(
@@ -321,46 +319,49 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: TextField(
                     controller: _passwordController,
                     obscureText: _obscureText,
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
+                    style: TextStyle(fontSize: 14),
                     decoration: InputDecoration(
                       hintText: 'Kata Sandi',
                       filled: true,
                       fillColor: Color(0xFFDDDDDD),
                       prefixIcon: Padding(
-                        padding: const EdgeInsets.only(left: 10), // Geser ke kanan
-                        child: Icon(
-                          Icons.lock_outline,
-                          size: 20
-                        ),
+                        padding: const EdgeInsets.only(
+                          left: 10,
+                        ), // Geser ke kanan
+                        child: Icon(Icons.lock_outline, size: 20),
                       ),
 
                       suffixIcon: Padding(
-                        padding: const EdgeInsets.only(right: 10), // Geser ke kanan
+                        padding: const EdgeInsets.only(
+                          right: 10,
+                        ), // Geser ke kanan
                         child: IconButton(
                           icon: Icon(
-                            _obscureText ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-                            size: 17
+                            _obscureText
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_outlined,
+                            size: 17,
                           ),
                           onPressed: _toggleObscure,
                         ),
                       ),
 
-                      contentPadding: EdgeInsets.only(left:25),
+                      contentPadding: EdgeInsets.only(left: 25),
 
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xFFDDDDDD), width: 2),
+                        borderSide: BorderSide(
+                          color: Color(0xFFDDDDDD),
+                          width: 2,
+                        ),
                         borderRadius: BorderRadius.circular(40),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(40),
-                        borderSide: BorderSide(color: Color(0xFFDDDDDD))
+                        borderSide: BorderSide(color: Color(0xFFDDDDDD)),
                       ),
                     ),
                   ),
                 ),
-                
 
                 SizedBox(height: 44),
 
@@ -371,14 +372,14 @@ class _RegisterPageState extends State<RegisterPage> {
                     onPressed: _handleRegister,
 
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.primary
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                     ),
                     child: Text(
                       'Daftar',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white
+                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -387,17 +388,16 @@ class _RegisterPageState extends State<RegisterPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "Sudah punya akun?",
-                      style: TextStyle(fontSize: 14),
-                    ),
+                    Text("Sudah punya akun?", style: TextStyle(fontSize: 14)),
 
                     SizedBox(
                       child: TextButton(
                         onPressed: () {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => LoginPage()),
+                            MaterialPageRoute(
+                              builder: (context) => LoginPage(),
+                            ),
                           );
                         },
                         child: Text(
@@ -405,12 +405,14 @@ class _RegisterPageState extends State<RegisterPage> {
                           style: TextStyle(
                             fontSize: 14,
                             decoration: TextDecoration.underline,
-                            decorationColor: Theme.of(context).colorScheme.primary,
-                            color: Theme.of(context).colorScheme.primary
+                            decorationColor: Theme.of(
+                              context,
+                            ).colorScheme.primary,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
-                        )
+                        ),
                       ),
-                    )
+                    ),
                   ],
                 ),
 
@@ -424,13 +426,15 @@ class _RegisterPageState extends State<RegisterPage> {
                       style: TextStyle(fontSize: 10),
                     ),
 
-                  SizedBox(
+                    SizedBox(
                       height: 30,
                       child: TextButton(
                         onPressed: () {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => RegisterPage()),
+                            MaterialPageRoute(
+                              builder: (context) => RegisterPage(),
+                            ),
                           );
                         },
                         child: Text(
@@ -438,16 +442,16 @@ class _RegisterPageState extends State<RegisterPage> {
                           style: TextStyle(
                             fontSize: 10,
                             decoration: TextDecoration.underline,
-                            decorationColor: Theme.of(context).colorScheme.primary,
-                            color: Theme.of(context).colorScheme.primary
+                            decorationColor: Theme.of(
+                              context,
+                            ).colorScheme.primary,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
-                        )
+                        ),
                       ),
-                    )
-
+                    ),
                   ],
-                )
-                
+                ),
               ],
             ),
           ),
@@ -456,6 +460,3 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 }
-
-
-

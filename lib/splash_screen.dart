@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'login.dart';
-
+import 'package:nest_and_beans/login.dart';
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +18,10 @@ class SplashScreen extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment:
-                  isWide ? CrossAxisAlignment.center : CrossAxisAlignment.start,
-              
+              crossAxisAlignment: isWide
+                  ? CrossAxisAlignment.center
+                  : CrossAxisAlignment.start,
+
               children: [
                 const Text(
                   'Nest and Beans, Teman Kalcer Terbaikmu',
@@ -32,14 +31,14 @@ class SplashScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                
+
                 const SizedBox(height: 8),
                 Text(
                   'Hangatkan harimu dengan memesan kopi di Nest and Beans',
                   style: TextStyle(color: Colors.white, fontSize: 16),
                   textAlign: isWide ? TextAlign.center : TextAlign.start,
                 ),
-                
+
                 const SizedBox(height: 32),
                 SizedBox(
                   width: isWide ? 300 : double.infinity,
