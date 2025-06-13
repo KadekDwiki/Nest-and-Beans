@@ -59,7 +59,7 @@ final List<Purchase> purchaseHistory = [
     id: 'trx003',
     product: productLists[3],
     selectedSize: 'M',
-    quantity: 1,
+    quantity: 3,
     toppings: ['Oat Milk'],
     totalPrice: 30000.0,
     paymentMethod: PaymentMethod.ovo,
@@ -70,7 +70,7 @@ final List<Purchase> purchaseHistory = [
   Purchase(
     id: 'trx004',
     product: productLists[0],
-    selectedSize: 'M',
+    selectedSize: 'L',
     quantity: 2,
     toppings: ['Extra Shot', 'Whipped Cream', 'Oat Milk'],
     totalPrice: 28000.0 * 2,

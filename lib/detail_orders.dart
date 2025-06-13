@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '/Model/purchase.dart';
-import 'order_ready.dart';
+import 'package:nest_and_beans/order_ready.dart';
 
 class DetailOrders extends StatelessWidget {
   final Purchase purchase;
@@ -165,7 +165,9 @@ class DetailOrders extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => OrderReadyScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => OrderReadyScreen(purchase: purchase),
+                  ),
                 );
               },
               child: const Text(

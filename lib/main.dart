@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nest_and_beans/Pages/pemesanan.dart';
+import 'package:nest_and_beans/order_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nest_and_beans/Model/product.dart';
 import 'package:nest_and_beans/purchase_history.dart';
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
       //home: const PurchaseHistory(),
       //home: const PaymentSuccessScreen(),
       //home:  ProductDetail(product: productLists[0]),
-      home: const Pemesanan(),
+      home: const OrderPage(),
     );
   }
 }
