@@ -35,7 +35,7 @@ final List<Product> productLists = [
     description:
         'Perpaduan sempurna antara espresso, susu hangat, dan sirup karamel yang manis. Cocok untuk penikmat kopi ringan.',
     category: 'Milk-Based',
-    imageCover: 'assets/images/caramel-latte.jpg',
+    imageCover: 'assets/images/caramel_latte.jpg',
     imagesSlider: [
       'assets/images/caramel-latte-1.jpg',
       'assets/images/caramel-latte-2.jpg',

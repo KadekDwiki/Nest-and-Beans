@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:nest_and_beans/order_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nest_and_beans/Model/product.dart';
+import 'package:nest_and_beans/payment_method.dart';
 import 'package:nest_and_beans/purchase_history.dart';
 //import 'product_detail.dart';
 import 'payment_success.dart';
@@ -45,7 +46,8 @@ class MyApp extends StatelessWidget {
       // home: PaymentSuccessScreen(purchase: purchaseHistory[0]),
       //home: const OrderReadyScreen(purchase: PurchaseHistory()[1],),
       //home:  ProductDetail(product: productLists[0]),
-      home: const OrderPage(),
+      // home: const OrderPage(),
+      home: const ChoosePaymentMethod(),
     );
   }
 }
