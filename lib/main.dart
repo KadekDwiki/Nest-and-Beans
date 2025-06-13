@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:nest_and_beans/order_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nest_and_beans/Model/product.dart';
 import 'package:nest_and_beans/purchase_history.dart';
-import 'product_detail.dart';
+//import 'product_detail.dart';
 import 'payment_success.dart';
 import 'login.dart';
 //import 'package:nest_and_beans/purchase_history.dart';
 //import 'product_detail.dart';
-//import 'payment_success.dart';
 //import 'order_ready.dart';
+import '/Model/purchase.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,38 +32,22 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.interTextTheme(),
         colorScheme: ColorScheme.light(
-          primary: Color(0xFF185221),
-          secondary: Color.fromRGBO(117, 117, 117, 0.7),
+          primary: Color.fromARGB(255, 33, 133, 48),
+          secondary: Color.fromRGBO(80, 80, 80, 0.907),
         ),
       ),
-      home: const MyHomePage(),
+      // home: const MyHomePage(),
       //home: const PurchaseHistory(),
       //home: const PaymentSuccessScreen(),
       //home:  ProductDetail(product: productLists[1]),
       //home: const MyHomePage(),
       //home: const LoginPage(),
+      // home: const MyHomePage(),
+      //home: const MyHomePage(),
       //home: const PurchaseHistory(),
-      //home: const PaymentSuccessScreen(),
+      // home: PaymentSuccessScreen(purchase: purchaseHistory[0]),
+      //home: const OrderReadyScreen(purchase: PurchaseHistory()[1],),
       //home:  ProductDetail(product: productLists[0]),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) { 
-    final colorscheme = Theme.of(context).colorScheme;
-    return Scaffold(
-      appBar: AppBar(title: const Text('Nest & Beans')),
-      body: Center(
-        child: Text(
-          'Hello Nest & Beans!',
-          style: TextStyle(fontSize: 24, color: colorscheme.primary),
-          textAlign: TextAlign.center,
-        ),
-      ),
     );
   }
 }

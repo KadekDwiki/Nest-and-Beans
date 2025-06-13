@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '/Model/purchase.dart';
-import 'order_ready.dart';
+import 'package:nest_and_beans/order_ready.dart';
 
 class DetailOrders extends StatelessWidget {
   final Purchase purchase;
@@ -150,10 +150,10 @@ class DetailOrders extends StatelessWidget {
                 ),
               ],
             ),
-
+            const SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF185221),
+                backgroundColor: const Color(0xFF185221),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -166,7 +166,7 @@ class DetailOrders extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => OrderReadyScreen(purchase: purchase),
+                    builder: (_) => OrderReadyScreen(purchase: purchase),
                   ),
                 );
               },

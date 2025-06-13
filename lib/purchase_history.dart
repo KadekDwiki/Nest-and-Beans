@@ -15,6 +15,7 @@ class PurchaseHistory extends StatelessWidget {
           'Riwayat Pemesanan',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
 
       body: ListView.builder(
