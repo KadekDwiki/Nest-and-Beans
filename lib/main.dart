@@ -7,6 +7,7 @@ import 'package:nest_and_beans/payment_method.dart';
 import 'package:nest_and_beans/purchase_history.dart';
 //import 'product_detail.dart';
 import 'payment_success.dart';
+import 'login.dart';
 //import 'package:nest_and_beans/purchase_history.dart';
 //import 'product_detail.dart';
 //import 'order_ready.dart';
@@ -40,14 +41,17 @@ class MyApp extends StatelessWidget {
       //home: const PurchaseHistory(),
       //home: const PaymentSuccessScreen(),
       //home:  ProductDetail(product: productLists[1]),
+      //home: const MyHomePage(),
+      //home: const LoginPage(),
       // home: const MyHomePage(),
       //home: const MyHomePage(),
       //home: const PurchaseHistory(),
       // home: PaymentSuccessScreen(purchase: purchaseHistory[0]),
       //home: const OrderReadyScreen(purchase: PurchaseHistory()[1],),
       //home:  ProductDetail(product: productLists[0]),
+
       // home: const OrderPage(),
-      home: const ChoosePaymentMethod(),
+      // home: const ChoosePaymentMethod(),
     );
   }
 }
