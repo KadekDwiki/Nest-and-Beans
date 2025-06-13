@@ -2,6 +2,8 @@ import 'product.dart';
 
 enum PurchaseStatus { berhasil, pending, gagal }
 
+enum PaymentMethod { qris, ovo, dana }
+
 class Purchase {
   String id;
   Product product;
@@ -9,6 +11,7 @@ class Purchase {
   int quantity;
   List<String> toppings;
   double totalPrice;
+  PaymentMethod paymentMethod;
   DateTime purchaseDate;
   PurchaseStatus status;
   String location;
@@ -20,6 +23,7 @@ class Purchase {
     required this.quantity,
     required this.toppings,
     required this.totalPrice,
+    required this.paymentMethod,
     required this.purchaseDate,
     required this.status,
     required this.location,
@@ -34,6 +38,7 @@ final List<Purchase> purchaseHistory = [
     quantity: 2,
     toppings: ['Extra Shot', 'Whipped Cream', 'Oat Milk'],
     totalPrice: 28000.0 * 2,
+    paymentMethod: PaymentMethod.ovo,
     purchaseDate: DateTime(2025, 6, 1, 14, 30),
     status: PurchaseStatus.berhasil,
     location: 'Denpasar, Bali',
@@ -45,6 +50,7 @@ final List<Purchase> purchaseHistory = [
     quantity: 1,
     toppings: ['Lemon Slice', 'Brown Sugar'],
     totalPrice: 32000.0,
+    paymentMethod: PaymentMethod.ovo,
     purchaseDate: DateTime(2025, 6, 5, 10, 0),
     status: PurchaseStatus.gagal,
     location: 'Ubud, Bali',
@@ -56,6 +62,7 @@ final List<Purchase> purchaseHistory = [
     quantity: 1,
     toppings: ['Oat Milk'],
     totalPrice: 30000.0,
+    paymentMethod: PaymentMethod.ovo,
     purchaseDate: DateTime(2025, 6, 10, 17, 45),
     status: PurchaseStatus.pending,
     location: 'Canggu, Bali',
@@ -67,6 +74,7 @@ final List<Purchase> purchaseHistory = [
     quantity: 2,
     toppings: ['Extra Shot', 'Whipped Cream', 'Oat Milk'],
     totalPrice: 28000.0 * 2,
+    paymentMethod: PaymentMethod.ovo,
     purchaseDate: DateTime(2025, 6, 1, 14, 30),
     status: PurchaseStatus.berhasil,
     location: 'Denpasar, Bali',
@@ -78,6 +86,7 @@ final List<Purchase> purchaseHistory = [
     quantity: 1,
     toppings: ['Lemon Slice', 'Brown Sugar'],
     totalPrice: 32000.0,
+    paymentMethod: PaymentMethod.ovo,
     purchaseDate: DateTime(2025, 6, 5, 10, 0),
     status: PurchaseStatus.gagal,
     location: 'Ubud, Bali',
@@ -89,6 +98,7 @@ final List<Purchase> purchaseHistory = [
     quantity: 1,
     toppings: ['Oat Milk'],
     totalPrice: 30000.0,
+    paymentMethod: PaymentMethod.ovo,
     purchaseDate: DateTime(2025, 6, 10, 17, 45),
     status: PurchaseStatus.pending,
     location: 'Canggu, Bali',
@@ -100,6 +110,7 @@ final List<Purchase> purchaseHistory = [
     quantity: 2,
     toppings: ['Extra Shot', 'Whipped Cream', 'Oat Milk'],
     totalPrice: 28000.0 * 2,
+    paymentMethod: PaymentMethod.ovo,
     purchaseDate: DateTime(2025, 6, 1, 14, 30),
     status: PurchaseStatus.berhasil,
     location: 'Denpasar, Bali',
@@ -111,6 +122,7 @@ final List<Purchase> purchaseHistory = [
     quantity: 1,
     toppings: ['Lemon Slice', 'Brown Sugar'],
     totalPrice: 32000.0,
+    paymentMethod: PaymentMethod.ovo,
     purchaseDate: DateTime(2025, 6, 5, 10, 0),
     status: PurchaseStatus.gagal,
     location: 'Ubud, Bali',
@@ -122,6 +134,7 @@ final List<Purchase> purchaseHistory = [
     quantity: 1,
     toppings: ['Oat Milk'],
     totalPrice: 30000.0,
+    paymentMethod: PaymentMethod.ovo,
     purchaseDate: DateTime(2025, 6, 10, 17, 45),
     status: PurchaseStatus.pending,
     location: 'Canggu, Bali',

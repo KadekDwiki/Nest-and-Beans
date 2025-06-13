@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import '/Model/purchase.dart';
 
-class DetailPurchase extends StatelessWidget {
+class DetailOrders extends StatelessWidget {
   final Purchase purchase;
 
-  const DetailPurchase({required this.purchase, super.key});
+  const DetailOrders({required this.purchase, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Detail Pembelian',
+          'Detail Pemesanan',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -148,6 +148,26 @@ class DetailPurchase extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF185221),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+              ),
+              onPressed: () {
+                // Aksi
+              },
+              child: const Text(
+                'AMBIL SEKARANG',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),
