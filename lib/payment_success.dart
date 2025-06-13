@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'detail_purchase.dart';
+import 'package:nest_and_beans/detail_orders.dart';
 import '/Model/purchase.dart';
 
 class PaymentSuccessScreen extends StatelessWidget {
@@ -9,7 +9,6 @@ class PaymentSuccessScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
     final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
@@ -34,14 +33,15 @@ class PaymentSuccessScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            const Text(
-              '29 Februari 2025, 19:38',
-              style: TextStyle(fontSize: 16),
+            Text(
+              _formatDate(purchase.purchaseDate),
+              style: const TextStyle(color: Colors.black87, fontSize: 13),
             ),
+            const SizedBox(height: 6),
             const SizedBox(height: 5),
-            const Text(
-              'Rp 28.000',
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+            Text(
+              'Rp ${purchase.totalPrice.toStringAsFixed(0)}',
+              style: const TextStyle(fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 20),
             const Text(
@@ -63,8 +63,8 @@ class PaymentSuccessScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => DetailPurchase(purchase: purchase),
-                  ), //ganti pake punya pyari nanti
+                    builder: (_) => DetailOrders(purchase: purchase),
+                  ),
                 );
               },
               child: const Text("Lihat Detail"),
@@ -74,4 +74,29 @@ class PaymentSuccessScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+String _formatDate(DateTime date) {
+  return '${_twoDigits(date.day)} ${_monthName(date.month)} ${date.year}, ${_twoDigits(date.hour)}:${_twoDigits(date.minute)}';
+}
+
+String _twoDigits(int n) => n.toString().padLeft(2, '0');
+
+String _monthName(int month) {
+  const monthNames = [
+    '',
+    'Januari',
+    'Februari',
+    'Maret',
+    'April',
+    'Mei',
+    'Juni',
+    'Juli',
+    'Agustus',
+    'September',
+    'Oktober',
+    'November',
+    'Desember',
+  ];
+  return monthNames[month];
 }
