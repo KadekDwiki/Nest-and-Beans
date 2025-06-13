@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:nest_and_beans/order_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nest_and_beans/Model/product.dart';
-import 'package:nest_and_beans/payment_method.dart';
+import 'package:nest_and_beans/payment_method_page.dart';
 import 'package:nest_and_beans/purchase_history.dart';
 //import 'product_detail.dart';
 import 'payment_success.dart';

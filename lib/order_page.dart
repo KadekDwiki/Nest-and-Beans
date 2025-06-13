@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nest_and_beans/Model/purchase.dart';
-import 'package:nest_and_beans/payment_method.dart';
+import 'package:nest_and_beans/payment_method_page.dart';
+import 'package:nest_and_beans/voucher_page.dart';
 
 class OrderPage extends StatelessWidget {
   const OrderPage({super.key});
@@ -298,7 +299,14 @@ class OrderPage extends StatelessWidget {
                             ),
                           ),
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const ChooseVoucherPage(),
+                                ),
+                              );
+                            },
                             icon: Icon(
                               Icons.arrow_forward_ios_rounded,
                               color: colorscheme.primary,
