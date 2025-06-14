@@ -8,6 +8,7 @@ class DetailPurchase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorscheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -15,7 +16,7 @@ class DetailPurchase extends StatelessWidget {
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: const Color(0xFF185221),
+        backgroundColor: colorscheme.primary,
 
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -41,9 +42,9 @@ class DetailPurchase extends StatelessWidget {
 
             Text(
               'ORDER ID : #${purchase.id}',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 14,
-                color: Color(0xFF185221),
+                color: colorscheme.primary,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -141,10 +142,10 @@ class DetailPurchase extends StatelessWidget {
                 ),
                 Text(
                   'Rp ${purchase.totalPrice.toStringAsFixed(0)}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF185221),
+                    color: colorscheme.primary,
                   ),
                 ),
               ],

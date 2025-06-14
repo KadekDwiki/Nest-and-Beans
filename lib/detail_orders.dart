@@ -9,6 +9,7 @@ class DetailOrders extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorscheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -16,7 +17,7 @@ class DetailOrders extends StatelessWidget {
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: const Color(0xFF185221),
+        backgroundColor: colorscheme.primary,
 
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -42,9 +43,9 @@ class DetailOrders extends StatelessWidget {
 
             Text(
               'ORDER ID : #${purchase.id}',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 14,
-                color: Color(0xFF185221),
+                color: colorscheme.primary,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -142,10 +143,10 @@ class DetailOrders extends StatelessWidget {
                 ),
                 Text(
                   'Rp ${purchase.totalPrice.toStringAsFixed(0)}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF185221),
+                    color: colorscheme.primary,
                   ),
                 ),
               ],
@@ -153,7 +154,7 @@ class DetailOrders extends StatelessWidget {
             const SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF185221),
+                backgroundColor: colorscheme.primary,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -185,7 +186,7 @@ class DetailOrders extends StatelessWidget {
 Color getStatusColor(PurchaseStatus status) {
   switch (status) {
     case PurchaseStatus.berhasil:
-      return const Color(0xFF185221);
+      return const Color.fromARGB(255, 33, 133, 48);
     case PurchaseStatus.gagal:
       return Colors.red;
     case PurchaseStatus.pending:
