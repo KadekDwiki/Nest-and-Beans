@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-
+import 'package:nest_and_beans/Model/product.dart';
+import 'package:nest_and_beans/product_detail.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -8,12 +9,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF6F6F6), 
+      backgroundColor: const Color(0xFFF6F6F6),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
-            HeaderWithSearch(),    
+            HeaderWithSearch(),
             SizedBox(height: 45),
             VoucherCard(),
             SizedBox(height: 25),
@@ -25,7 +26,7 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNav(), 
+      bottomNavigationBar: CustomBottomNav(),
     );
   }
 }
@@ -37,29 +38,48 @@ class HeaderWithSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       clipBehavior: Clip.none,
-      children: [ 
+      children: [
         Container(
-          padding: const EdgeInsets.only(top: 92, left: 42, right: 42, bottom: 52),
+          padding: const EdgeInsets.only(
+            top: 92,
+            left: 42,
+            right: 42,
+            bottom: 52,
+          ),
           decoration: const BoxDecoration(
             color: Color(0xFF005E2E),
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(10),
               bottomRight: Radius.circular(10),
-            )
+            ),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                  Text("Selamat Siang,", style: TextStyle(color: Colors.white , fontWeight: FontWeight.bold,fontSize: 24)),
-                  Text("Mutiara Dianing", style: TextStyle(color: Colors.white,  fontSize: 18)),
-                  ],
+                children: const [
+                  Text(
+                    "Selamat Siang,",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
+                  ),
+                  Text(
+                    "Mutiara Dianing",
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                ],
               ),
               Row(
                 children: const [
-                  Icon(Icons.shopping_cart_outlined, color: Colors.white, size: 32,),
+                  Icon(
+                    Icons.shopping_cart_outlined,
+                    color: Colors.white,
+                    size: 32,
+                  ),
                 ],
               ),
             ],
@@ -174,7 +194,7 @@ class _PromoCarouselState extends State<PromoCarousel> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0), 
+      padding: const EdgeInsets.symmetric(horizontal: 30.0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: Stack(
@@ -233,27 +253,6 @@ class RekomendasiProduk extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, String>> products = [
-      {
-        'title': 'Almond Croissant',
-        'desc': 'Croissant dengan taburan almond...',
-        'image': 'assets/images/produk.png',
-        'price': 'Rp 36.000',
-      },
-      {
-        'title': 'Cappuccino',
-        'desc': 'Kopi hangat dengan susu steamed',
-        'image': 'assets/images/produk.png',
-        'price': 'Rp 25.000',
-      },
-      {
-        'title': 'Avocado Juice',
-        'desc': 'Jus alpukat segar dan kental',
-        'image': 'assets/images/produk.png',
-        'price': 'Rp 22.000',
-      },
-    ];
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -263,7 +262,7 @@ class RekomendasiProduk extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'Recommended',
+                'Rekomendasi',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Text(
@@ -283,92 +282,107 @@ class RekomendasiProduk extends StatelessWidget {
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            itemCount: products.length,
+            itemCount: productLists.length,
             itemBuilder: (context, index) {
-              final product = products[index];
-              return Container(
-                width: 280,
-                margin: const EdgeInsets.only(right: 16),
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  elevation: 20,
-                  shadowColor: Colors.black.withOpacity(0.2),
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(6),
-                          bottomLeft: Radius.circular(6),
-                        ),
-                        child: Image.asset(
-                          product['image']!,
-                          width: 80,
-                          height: 120,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      product['title']!,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Text(
-                                product['desc']!,
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.grey,
-                                ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              const SizedBox(height: 20),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    product['price']!,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14,
-                                      color: Color(0xFF005E2E)
-                                    ),
-                                  ),
-                                  Container(
-                                    width: 28,
-                                    height: 28,
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xFF005E2E),
-                                      borderRadius: BorderRadius.circular(5),  
-                                      
-                                      ),
-                                    child: const Icon(Icons.add, size: 16, color: Colors.white),
-                                  ),
-                                ],
-                              ),
-                            ],
+              final product = productLists[index];
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductDetail(product: product),
+                    ),
+                  );
+                },
+                child: Container(
+                  width: 280,
+                  margin: const EdgeInsets.only(right: 16),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    elevation: 20,
+                    shadowColor: Colors.black.withOpacity(0.2),
+                    child: Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(6),
+                            bottomLeft: Radius.circular(6),
+                          ),
+                          child: Image.asset(
+                            product.imageCover,
+                            width: 80,
+                            height: 120,
+                            fit: BoxFit.cover,
                           ),
                         ),
-                      ),
-                    ],
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        product.name,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  product.description,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                const SizedBox(height: 20),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Rp ${product.price.toStringAsFixed(0)}',
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14,
+                                        color: Color(0xFF005E2E),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: 28,
+                                      height: 28,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFF005E2E),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: const Icon(
+                                        Icons.add,
+                                        size: 16,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
@@ -385,45 +399,6 @@ class ListProduk extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, String>> products = [
-      {
-        'title': 'Cafe Malt Latte',
-        'desc': 'Latte dengan malt yang creamy',
-        'image': 'assets/images/produk.png',
-        'price': 'Rp 23.000',
-      },
-      {
-        'title': 'Americano Aren',
-        'desc': 'Americano dengan gula aren',
-        'image': 'assets/images/produk.png',
-        'price': 'Rp 19.000',
-      },
-      {
-        'title': 'Americano Aren',
-        'desc': 'Americano dengan gula aren',
-        'image': 'assets/images/produk.png',
-        'price': 'Rp 19.000',
-      },
-      {
-        'title': 'Americano Aren',
-        'desc': 'Americano dengan gula aren',
-        'image': 'assets/images/produk.png',
-        'price': 'Rp 19.000',
-      },
-      {
-        'title': 'Americano Aren',
-        'desc': 'Americano dengan gula aren',
-        'image': 'assets/images/produk.png',
-        'price': 'Rp 19.000',
-      },
-      {
-        'title': 'Americano Aren',
-        'desc': 'Americano dengan gula aren',
-        'image': 'assets/images/produk.png',
-        'price': 'Rp 19.000',
-      }
-    ];
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
@@ -449,13 +424,12 @@ class ListProduk extends StatelessWidget {
           ),
 
           const SizedBox(height: 12), // Spacer kecil
-
           // Grid Produk
           GridView.builder(
             padding: EdgeInsets.zero,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: products.length,
+            itemCount: productLists.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 10,
@@ -463,67 +437,78 @@ class ListProduk extends StatelessWidget {
               childAspectRatio: 0.80, // lebih seimbang
             ),
             itemBuilder: (context, index) {
-              final product = products[index];
-              return Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                 elevation: 20,
-                shadowColor: Colors.black.withOpacity(0.2),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Gambar dengan rasio tetap
-                    ClipRRect(
-                      borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(12),
-                      ),
-                      child: AspectRatio(
-                        aspectRatio: 1.6, // Rasio lebih pendek agar tidak terlalu tinggi
-                        child: Image.asset(
-                          product['image']!,
-                          fit: BoxFit.cover,
+              final product = productLists[index];
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductDetail(product: product),
+                    ),
+                  );
+                },
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  elevation: 20,
+                  shadowColor: Colors.black.withOpacity(0.2),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Gambar dengan rasio tetap
+                      ClipRRect(
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(12),
+                        ),
+                        child: AspectRatio(
+                          aspectRatio:
+                              2.0, // Rasio lebih pendek agar tidak terlalu tinggi
+                          child: Image.asset(
+                            product.imageCover,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                    // Konten teks
-                    Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            product['title']!,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
+                      // Konten teks
+                      Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              product.name,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            product['desc']!,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey,
+                            const SizedBox(height: 4),
+                            Text(
+                              product.description,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            product['price']!,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 13,
-                              color: Color(0xFF005E2E),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Rp ${product.price.toStringAsFixed(0)}',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 13,
+                                color: Color(0xFF005E2E),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             },
@@ -533,7 +518,6 @@ class ListProduk extends StatelessWidget {
     );
   }
 }
-
 
 class CustomBottomNav extends StatelessWidget {
   const CustomBottomNav({super.key});
@@ -546,12 +530,13 @@ class CustomBottomNav extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
-        BottomNavigationBarItem(icon: Icon(Icons.receipt_long), label: 'Pesananku'),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.receipt_long),
+          label: 'Pesananku',
+        ),
         BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Komunitas'),
         BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Akun'),
       ],
     );
   }
 }
-
-

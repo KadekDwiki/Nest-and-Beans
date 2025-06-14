@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:nest_and_beans/homepage.dart';
 import 'splash_screen.dart';
 import 'register.dart';
 
@@ -74,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
     // Jika semua validasi lolos
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => RegisterPage()),
+      MaterialPageRoute(builder: (context) => HomePage()),
     );
   }
 
