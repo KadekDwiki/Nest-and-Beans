@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nest_and_beans/Model/product.dart';
+import 'package:nest_and_beans/order_page.dart';
 
 class ProductDetail extends StatefulWidget {
   final Product product;
@@ -19,6 +20,7 @@ class _ProductDetailState extends State<ProductDetail> {
   Widget build(BuildContext context) {
     final product = widget.product;
     final double totalPrice = product.price * quantity;
+    final colorscheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       appBar: AppBar(
@@ -26,7 +28,7 @@ class _ProductDetailState extends State<ProductDetail> {
           'Detail Produk',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
-        backgroundColor: Color(0xFF185221),
+        backgroundColor: colorscheme.primary,
         centerTitle: true,
         elevation: 1,
         leading: IconButton(
@@ -48,13 +50,29 @@ class _ProductDetailState extends State<ProductDetail> {
                 borderRadius: BorderRadius.circular(12),
                 child: Image.asset(
                   product.imageCover,
-                  height: 550,
+                  height: 440,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
             const SizedBox(height: 20),
+
+            SizedBox(
+              height: 100,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: product.imagesSlider.map((imagePath) {
+                  return Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.asset(imagePath),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
 
             // Nama dan deskripsi
             Text(
@@ -104,6 +122,8 @@ class _ProductDetailState extends State<ProductDetail> {
                 );
               }).toList(),
             ),
+            const SizedBox(height: 20),
+            const Divider(height: 10, color: Colors.grey),
             const SizedBox(height: 20),
 
             // Pilihan ukuran
@@ -186,18 +206,25 @@ class _ProductDetailState extends State<ProductDetail> {
                 onPressed: selectedSize == null || !product.isAvailable
                     ? null
                     : () {
-                        // aksi beli atau tambah ke keranjang
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return OrderPage();
+                            },
+                          ),
+                        );
                       },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF185221),
+                  backgroundColor: colorscheme.primary,
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 28,
+                    horizontal: 35,
                     vertical: 12,
                   ),
                 ),
                 child: Text(
                   'Tambah - Rp ${totalPrice.toStringAsFixed(0)}',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(fontSize: 18.0, color: Colors.white),
                 ),
               ),
             ],

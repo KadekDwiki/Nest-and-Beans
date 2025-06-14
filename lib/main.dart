@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+//import 'package:nest_and_beans/Model/product.dart';
 import 'package:nest_and_beans/splash_screen.dart';
+//import 'package:nest_and_beans/product_detail.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +30,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const SplashScreen(),
+      //home: ProductDetail(product: productLists[0]),
     );
   }
 }
