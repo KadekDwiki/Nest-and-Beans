@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nest_and_beans/Model/purchase.dart';
-import 'package:nest_and_beans/order_ready.dart';
 import 'package:nest_and_beans/payment_method_page.dart';
+import 'package:nest_and_beans/payment_success.dart';
 import 'package:nest_and_beans/voucher_page.dart';
 
 class OrderPage extends StatelessWidget {
@@ -14,6 +14,7 @@ class OrderPage extends StatelessWidget {
     final colorscheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text(
           'Checkout',
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -443,7 +444,7 @@ class OrderPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => OrderReadyScreen(purchase: purchaseItem),
+                  builder: (_) => PaymentSuccessScreen(purchase: purchaseItem),
                 ),
               );
             },

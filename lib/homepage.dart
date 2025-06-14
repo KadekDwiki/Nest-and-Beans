@@ -73,15 +73,15 @@ class HeaderWithSearch extends StatelessWidget {
                   ),
                 ],
               ),
-              Row(
-                children: const [
-                  Icon(
-                    Icons.shopping_cart_outlined,
-                    color: Colors.white,
-                    size: 32,
-                  ),
-                ],
-              ),
+              // Row(
+              //   children: const [
+              //     Icon(
+              //       Icons.shopping_cart_outlined,
+              //       color: Colors.white,
+              //       size: 32,
+              //     ),
+              //   ],
+              // ),
             ],
           ),
         ),
