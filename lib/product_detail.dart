@@ -37,7 +37,6 @@ class _ProductDetailState extends State<ProductDetail> {
             Navigator.pop(context);
           },
         ),
-        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -117,7 +116,7 @@ class _ProductDetailState extends State<ProductDetail> {
                       },
                     ),
                     Text(size),
-                    const SizedBox(width: 50), // Jarak antar pilihan
+                    const SizedBox(width: 50),
                   ],
                 );
               }).toList(),
@@ -151,21 +150,12 @@ class _ProductDetailState extends State<ProductDetail> {
               }).toList(),
             ),
 
-            // Notifikasi jika tidak tersedia
-            if (!product.isAvailable)
-              const Text(
-                'Tidak tersedia saat ini',
-                style: TextStyle(color: Colors.red),
-              ),
-
-            const SizedBox(
-              height: 80,
-            ), // Untuk memberi jarak agar tombol tidak tertutup
+            const SizedBox(height: 80),
           ],
         ),
       ),
 
-      // Tombol beli di bawah
+      // Tombol beli
       bottomNavigationBar: SafeArea(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -201,7 +191,7 @@ class _ProductDetailState extends State<ProductDetail> {
                 ],
               ),
 
-              // Tombol beli
+              // Tombol tambah
               ElevatedButton(
                 onPressed: selectedSize == null || !product.isAvailable
                     ? null
