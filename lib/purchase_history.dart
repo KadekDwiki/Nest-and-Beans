@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '/Model/purchase.dart';
-import 'detail_purchase.dart';
+import 'package:nest_and_beans/Model/purchase.dart';
+import 'package:nest_and_beans/detail_purchase.dart';
 
 class PurchaseHistory extends StatelessWidget {
   const PurchaseHistory({super.key});
@@ -33,7 +33,7 @@ class PurchaseHistory extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.15),
+                  color: Color.fromRGBO(128, 128, 128, 0.15),
                   spreadRadius: 1,
                   blurRadius: 5,
                   offset: const Offset(0, 3),

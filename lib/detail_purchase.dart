@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/Model/purchase.dart';
+import 'package:nest_and_beans/Model/purchase.dart';
 
 class DetailPurchase extends StatelessWidget {
   final Purchase purchase;
@@ -38,6 +38,7 @@ class DetailPurchase extends StatelessWidget {
             const SizedBox(height: 4),
 
             Divider(color: getStatusColor(purchase.status), thickness: 2),
+
             const SizedBox(height: 4),
 
             Text(
@@ -90,7 +91,7 @@ class DetailPurchase extends StatelessWidget {
 
                       const SizedBox(height: 2),
                       Text(
-                        '${purchase.product.description}',
+                        purchase.product.description,
                         style: const TextStyle(fontSize: 10),
                       ),
                     ],

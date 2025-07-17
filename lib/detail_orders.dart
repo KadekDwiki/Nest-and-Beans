@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/Model/purchase.dart';
+import 'package:nest_and_beans/Model/purchase.dart';
 import 'package:nest_and_beans/order_ready.dart';
 
 class DetailOrders extends StatelessWidget {
@@ -91,7 +91,7 @@ class DetailOrders extends StatelessWidget {
 
                       const SizedBox(height: 2),
                       Text(
-                        '${purchase.product.description}',
+                        purchase.product.description,
                         style: const TextStyle(fontSize: 10),
                       ),
                     ],
