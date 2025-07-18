@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nest_and_beans/Model/product.dart';
+import 'package:nest_and_beans/model/product.dart';
 import 'package:nest_and_beans/order_page.dart';
+import 'package:provider/provider.dart';
+import 'package:nest_and_beans/model/cart_item.dart';
+import 'package:nest_and_beans/providers/cart_provider.dart';
 
 class ProductDetail extends StatefulWidget {
   final Product product;
@@ -59,10 +62,7 @@ class _ProductDetailState extends State<ProductDetail> {
                     ),
                   ),
                   const SizedBox(width: 24),
-                  Expanded(
-                    flex: 2,
-                    child: _buildProductDetailContent(product),
-                  ),
+                  Expanded(flex: 2, child: _buildProductDetailContent(product)),
                 ],
               )
             : Column(
@@ -118,14 +118,33 @@ class _ProductDetailState extends State<ProductDetail> {
                 ],
               ),
               ElevatedButton(
+                // onPressed: selectedSize == null || !product.isAvailable
+                //     ? null
+                //     : () {
+                //         Navigator.push(
+                //           context,
+                //           MaterialPageRoute(builder: (context) => OrderPage()),
+                //         );
+                //       },
                 onPressed: selectedSize == null || !product.isAvailable
                     ? null
                     : () {
+                        final cart = context.read<CartProvider>();
+
+                        final item = CartItem(
+                          id: '${product.id}_${selectedSize}_${selectedToppings.join(",")}', // sederhana
+                          product: product,
+                          size: selectedSize!,
+                          toppings: List.from(selectedToppings),
+                          qty: quantity,
+                        );
+
+                        cart.addItem(item);
+
+                        // langsung ke checkout?
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => OrderPage(),
-                          ),
+                          MaterialPageRoute(builder: (_) => const OrderPage()),
                         );
                       },
                 style: ElevatedButton.styleFrom(
@@ -172,10 +191,7 @@ class _ProductDetailState extends State<ProductDetail> {
           style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 4),
-        Text(
-          product.description,
-          style: const TextStyle(color: Colors.grey),
-        ),
+        Text(product.description, style: const TextStyle(color: Colors.grey)),
         const SizedBox(height: 12),
         Text(
           'Rp ${product.price.toStringAsFixed(0)}',

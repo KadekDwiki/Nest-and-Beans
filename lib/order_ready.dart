@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'purchase_history.dart'; //riwayat pembelian
-import '/Model/purchase.dart';
+import 'model/purchase.dart';
 
 class OrderReadyScreen extends StatelessWidget {
-  final Purchase purchase; //properti buat menyimpan data pembelian yang diterima dari halaman sebelumnya
+  final Purchase
+  purchase; //properti buat menyimpan data pembelian yang diterima dari halaman sebelumnya
 
   const OrderReadyScreen({super.key, required this.purchase});
 
@@ -84,11 +85,15 @@ class OrderReadyScreen extends StatelessWidget {
             ),
             const SizedBox(height: 14),
             ListTile(
-              contentPadding: EdgeInsets.zero, //padding default(biar lebih rapat ke kiri/kanan)
-              leading: ClipRRect( //gambar dikiri
+              contentPadding: EdgeInsets
+                  .zero, //padding default(biar lebih rapat ke kiri/kanan)
+              leading: ClipRRect(
+                //gambar dikiri
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
-                  purchase.product.imageCover, //diambil dari product yang ada di purchase
+                  purchase
+                      .product
+                      .imageCover, //diambil dari product yang ada di purchase
                   width: 50,
                   height: 50,
                   fit: BoxFit.cover,

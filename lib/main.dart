@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 // import provider packages
 import 'package:provider/provider.dart';
-import 'package:nest_and_beans/provider/home_provider.dart';
+import 'package:nest_and_beans/providers/home_provider.dart';
 import 'package:nest_and_beans/providers/cart_provider.dart';
 
 // import gogle fonts package

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:nest_and_beans/provider/home_provider.dart';
-import 'package:nest_and_beans/Model/purchase.dart';
+import 'package:nest_and_beans/providers/home_provider.dart';
+import 'package:nest_and_beans/model/purchase.dart';
 
 class Review extends StatefulWidget {
   final Purchase purchase;

@@ -134,7 +134,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nest_and_beans/detail_orders.dart';
-import '/Model/purchase.dart';
+import 'model/purchase.dart';
 
 class PaymentSuccessScreen extends StatefulWidget {
   //ganti ke stateful
