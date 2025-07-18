@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nest_and_beans/Model/purchase.dart';
+import 'package:nest_and_beans/model/purchase.dart';
 import 'package:nest_and_beans/detail_purchase.dart';
 
 class PurchaseHistory extends StatelessWidget {

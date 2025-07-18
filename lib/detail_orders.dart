@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nest_and_beans/Model/purchase.dart';
+import 'package:nest_and_beans/model/purchase.dart';
 import 'package:nest_and_beans/order_ready.dart';
 
 class DetailOrders extends StatelessWidget {

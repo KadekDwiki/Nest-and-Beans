@@ -66,7 +66,7 @@ final List<Product> productLists = [
       Review(
         user: 'Arjun',
         comment: 'Kopi lumayan enak, tapi menurut saya agak terlalu manis.',
-        rating: 4.5,
+        rating: 5,
         imagesSlider: [
           'assets/images/caramel_latte.jpg',
           'assets/images/caramel_latte.jpg',

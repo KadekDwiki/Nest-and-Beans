@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nest_and_beans/Model/product.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:nest_and_beans/model/product.dart';
 import 'package:nest_and_beans/product_detail.dart';
 import 'package:video_player/video_player.dart';
 

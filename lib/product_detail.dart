@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nest_and_beans/Model/product.dart';
+import 'package:nest_and_beans/model/product.dart';
 import 'package:nest_and_beans/order_page.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
+import 'package:nest_and_beans/model/cart_item.dart';
+import 'package:nest_and_beans/providers/cart_provider.dart';
 
 class ProductDetail extends StatefulWidget {
   final Product product;
@@ -116,9 +119,30 @@ class _ProductDetailState extends State<ProductDetail> {
                 ],
               ),
               ElevatedButton(
+                // onPressed: selectedSize == null || !product.isAvailable
+                //     ? null
+                //     : () {
+                //         Navigator.push(
+                //           context,
+                //           MaterialPageRoute(builder: (context) => OrderPage()),
+                //         );
+                //       },
                 onPressed: selectedSize == null || !product.isAvailable
                     ? null
                     : () {
+                        final cart = context.read<CartProvider>();
+
+                        final item = CartItem(
+                          id: '${product.id}_${selectedSize}_${selectedToppings.join(",")}', // sederhana
+                          product: product,
+                          size: selectedSize!,
+                          toppings: List.from(selectedToppings),
+                          qty: quantity,
+                        );
+
+                        cart.addItem(item);
+
+                        // langsung ke checkout?
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => OrderPage()),
@@ -266,31 +290,39 @@ class _ProductDetailState extends State<ProductDetail> {
                 children: [
                   // Avatar and Username
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const CircleAvatar(
-                        child: Icon(Icons.person, color: Colors.white),
-                        backgroundColor: Colors.grey,
+                      Row(
+                        children: [
+                          const CircleAvatar(
+                            child: Icon(Icons.person, color: Colors.white),
+                            backgroundColor: Colors.grey,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            review.user,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 10),
-                      Text(
-                        review.user,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(width: 140),
-                      RatingBarIndicator(
-                        rating: review.rating,
-                        itemBuilder: (context, _) =>
-                            const Icon(Icons.star, color: Colors.amber),
-                        itemCount: 5,
-                        itemSize: 20,
-                      ),
-                      const SizedBox(width: 5),
-                      Text(
-                        '${review.rating}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                        ),
+                      Row(
+                        children: [
+                          RatingBarIndicator(
+                            rating: review.rating,
+                            itemBuilder: (context, _) =>
+                                const Icon(Icons.star, color: Colors.amber),
+                            itemCount: 5,
+                            itemSize: 20,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            '${review.rating}',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
