@@ -1,12 +1,10 @@
-// import 'dart:io';
-
 import 'package:flutter/material.dart';
-// import 'package:flutter/foundation.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:nest_and_beans/providers/review_provider.dart';
 import 'package:nest_and_beans/Model/purchase.dart';
+import 'package:nest_and_beans/product_detail.dart';
 
 class Review extends StatefulWidget {
   final Purchase purchase;
@@ -259,13 +257,19 @@ class _ReviewState extends State<Review> {
         actions: [
           TextButton(
             onPressed: () {
-              // 1. Tutup AlertDialog
+              // Tutup AlertDialog
               Navigator.of(context, rootNavigator: true).pop();
 
-              // 2. Kembali ke halaman sebelumnya
-              Navigator.pop(context);
+              // Kembali ke halaman sebelumnya
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      ProductDetail(product: widget.purchase.product),
+                ),
+              );
 
-              // 3. Bersihkan state
+              // Bersihkan state
               context.read<ReviewProvider>().clearImages();
               _controller.clear();
             },
