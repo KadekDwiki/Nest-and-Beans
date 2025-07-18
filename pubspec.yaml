@@ -8,11 +8,14 @@ environment:
 
 dependencies:
   carousel_slider: 5.0.0
-  image_picker: ^1.0.4 
   flutter:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
+
+  provider: ^6.0.3
+  image_picker: ^1.0.4
+  image_picker_windows: ^0.2.1
   audioplayers: ^5.2.1
 
 dev_dependencies:
