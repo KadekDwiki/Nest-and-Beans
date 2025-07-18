@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nest_and_beans/model/product.dart';
 import 'package:nest_and_beans/order_page.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:nest_and_beans/model/cart_item.dart';
 import 'package:nest_and_beans/providers/cart_provider.dart';
@@ -144,7 +145,7 @@ class _ProductDetailState extends State<ProductDetail> {
                         // langsung ke checkout?
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (_) => const OrderPage()),
+                          MaterialPageRoute(builder: (context) => OrderPage()),
                         );
                       },
                 style: ElevatedButton.styleFrom(
@@ -200,6 +201,9 @@ class _ProductDetailState extends State<ProductDetail> {
         const SizedBox(height: 20),
         const Divider(height: 10, color: Colors.grey),
         const SizedBox(height: 20),
+
+        const SizedBox(height: 20),
+
         const Text(
           'Pilih Ukuran Cup:',
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -250,7 +254,100 @@ class _ProductDetailState extends State<ProductDetail> {
             );
           }).toList(),
         ),
-        const SizedBox(height: 80),
+        const SizedBox(height: 20),
+        const Divider(height: 10, color: Colors.grey),
+        const SizedBox(height: 20),
+
+        // Review and Rating Section
+        const Text(
+          'Ulasan Produk',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 10),
+        ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: product.reviews.length,
+          itemBuilder: (context, index) {
+            final review = product.reviews[index];
+
+            return Container(
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Avatar and Username
+                  Row(
+                    children: [
+                      const CircleAvatar(
+                        child: Icon(Icons.person, color: Colors.white),
+                        backgroundColor: Colors.grey,
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        review.user,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(width: 140),
+                      RatingBarIndicator(
+                        rating: review.rating,
+                        itemBuilder: (context, _) =>
+                            const Icon(Icons.star, color: Colors.amber),
+                        itemCount: 5,
+                        itemSize: 20,
+                      ),
+                      const SizedBox(width: 5),
+                      Text(
+                        '${review.rating}',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  // Rating
+                  const SizedBox(height: 8),
+
+                  // Review Comment
+                  Text(review.comment),
+                  const SizedBox(height: 8),
+
+                  // Gambar review
+                  if (review.imagesSlider.isNotEmpty)
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: review.imagesSlider.map((imgPath) {
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.asset(
+                            imgPath,
+                            width: 80,
+                            height: 80,
+                            fit: BoxFit.cover,
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                ],
+              ),
+            );
+          },
+        ),
       ],
     );
   }

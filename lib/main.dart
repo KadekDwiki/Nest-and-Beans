@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 // import provider packages
 import 'package:provider/provider.dart';
-import 'package:nest_and_beans/providers/home_provider.dart';
+import 'package:nest_and_beans/providers/review_provider.dart';
 import 'package:nest_and_beans/providers/cart_provider.dart';
 
 // import gogle fonts package
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => HomeProvider(),
+      create: (_) => ReviewProvider(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

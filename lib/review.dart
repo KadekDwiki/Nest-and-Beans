@@ -1,12 +1,10 @@
-// import 'dart:io';
-
 import 'package:flutter/material.dart';
-// import 'package:flutter/foundation.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:nest_and_beans/providers/home_provider.dart';
-import 'package:nest_and_beans/model/purchase.dart';
+import 'package:nest_and_beans/providers/review_provider.dart';
+import 'package:nest_and_beans/Model/purchase.dart';
+import 'package:nest_and_beans/product_detail.dart';
 
 class Review extends StatefulWidget {
   final Purchase purchase;
@@ -30,7 +28,7 @@ class _ReviewState extends State<Review> {
   @override
   Widget build(BuildContext context) {
     final colorscheme = Theme.of(context).colorScheme;
-    final imageFiles = context.watch<HomeProvider>().imageFiles;
+    final imageFiles = context.watch<ReviewProvider>().imageFiles;
 
     return Scaffold(
       appBar: AppBar(
@@ -182,12 +180,13 @@ class _ReviewState extends State<Review> {
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: _submitReview,
-                icon: const Icon(Icons.send, color: Colors.white),
+                // icon: const Icon(Icons.send, color: Colors.white),
                 label: const Text(
                   "Kirim Ulasan",
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
+                    fontSize: 16,
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
@@ -237,7 +236,7 @@ class _ReviewState extends State<Review> {
     final picker = ImagePicker();
     final picked = await picker.pickImage(source: ImageSource.gallery);
     if (picked != null) {
-      context.read<HomeProvider>().addImage(picked);
+      context.read<ReviewProvider>().addImage(picked);
     }
   }
 
@@ -245,7 +244,7 @@ class _ReviewState extends State<Review> {
     final picker = ImagePicker();
     final picked = await picker.pickImage(source: ImageSource.camera);
     if (picked != null) {
-      context.read<HomeProvider>().addImage(picked);
+      context.read<ReviewProvider>().addImage(picked);
     }
   }
 
@@ -258,14 +257,20 @@ class _ReviewState extends State<Review> {
         actions: [
           TextButton(
             onPressed: () {
-              // 1. Tutup AlertDialog
+              // Tutup AlertDialog
               Navigator.of(context, rootNavigator: true).pop();
 
-              // 2. Kembali ke halaman sebelumnya
-              Navigator.pop(context);
+              // Kembali ke halaman sebelumnya
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      ProductDetail(product: widget.purchase.product),
+                ),
+              );
 
-              // 3. Bersihkan state
-              context.read<HomeProvider>().clearImages();
+              // Bersihkan state
+              context.read<ReviewProvider>().clearImages();
               _controller.clear();
             },
             child: const Text("OK"),
