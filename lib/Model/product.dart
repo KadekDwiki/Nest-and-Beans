@@ -66,7 +66,7 @@ final List<Product> productLists = [
       Review(
         user: 'Arjun',
         comment: 'Kopi lumayan enak, tapi menurut saya agak terlalu manis.',
-        rating: 4.5,
+        rating: 5,
         imagesSlider: [
           'assets/images/caramel_latte.jpg',
           'assets/images/caramel_latte.jpg',
@@ -135,7 +135,7 @@ final List<Product> productLists = [
     name: 'Cold Brew Signature',
     description:
         'Kopi seduh dingin yang disimpan selama 18 jam untuk rasa yang lebih halus dan rendah asam.',
-    category: 'Cold Brew',
+    category: 'Milk-Based',
     imageCover: 'assets/images/cold_brew_signature.jpg',
     imagesSlider: [
       'assets/images/cold_brew_signature.jpg',
@@ -232,13 +232,51 @@ final List<Product> productLists = [
   ),
   Product(
     id: '5',
-    name: 'V60 Manual Brew',
+    name: 'V60 Brew',
     description:
         'Seduhan manual menggunakan metode V60 dengan biji kopi pilihan dari Gayo, menawarkan rasa fruity dan clean finish.',
     category: 'Manual Brew',
     imageCover: 'assets/images/v60.jpg',
     imagesSlider: ['assets/images/v60.jpg', 'assets/images/v60.jpg'],
     price: 35000.0,
+    rating: 4.9,
+    like: 105.0,
+    isAvailable: true,
+    sizes: ['M'],
+    toppings: [],
+    reviews: [
+      Review(
+        user: 'Rina',
+        comment: 'Enak banget!',
+        rating: 5.0,
+        imagesSlider: ['assets/images/v60.jpg', 'assets/images/v60.jpg'],
+      ),
+      Review(
+        user: 'Dimas',
+        comment: 'Kopi lumayan enak, tapi menurut saya agak terlalu manis.',
+        rating: 4.5,
+        imagesSlider: ['assets/images/v60.jpg', 'assets/images/v60.jpg'],
+      ),
+      Review(
+        user: 'Sari',
+        comment:
+            'Saya suka banget dengan rasa kopinya yang lembut dan tidak terlalu pahit. '
+            'Selain itu, tempatnya nyaman dan cocok buat kerja atau nongkrong bareng teman. '
+            'Recommended banget!',
+        rating: 4.7,
+        imagesSlider: ['assets/images/v60.jpg', 'assets/images/v60.jpg'],
+      ),
+    ],
+  ),
+    Product(
+    id: '6',
+    name: 'kopi Susu',
+    description:
+        'Kopi susu dengan campuran susu segar dan gula aren, memberikan rasa manis yang pas.',
+    category: 'Milk-Based',
+    imageCover: 'assets/images/kopisusu.jpg',
+    imagesSlider: ['assets/images/kopisusu.jpg', 'assets/images/kopisusu.jpg'],
+    price: 25000.0,
     rating: 4.9,
     like: 105.0,
     isAvailable: true,
