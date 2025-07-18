@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:nest_and_beans/provider/home_provider.dart';
+import 'package:nest_and_beans/providers/review_provider.dart';
 import 'package:nest_and_beans/Model/purchase.dart';
 
 class Review extends StatefulWidget {
@@ -30,7 +30,7 @@ class _ReviewState extends State<Review> {
   @override
   Widget build(BuildContext context) {
     final colorscheme = Theme.of(context).colorScheme;
-    final imageFiles = context.watch<HomeProvider>().imageFiles;
+    final imageFiles = context.watch<ReviewProvider>().imageFiles;
 
     return Scaffold(
       appBar: AppBar(
@@ -238,7 +238,7 @@ class _ReviewState extends State<Review> {
     final picker = ImagePicker();
     final picked = await picker.pickImage(source: ImageSource.gallery);
     if (picked != null) {
-      context.read<HomeProvider>().addImage(picked);
+      context.read<ReviewProvider>().addImage(picked);
     }
   }
 
@@ -246,7 +246,7 @@ class _ReviewState extends State<Review> {
     final picker = ImagePicker();
     final picked = await picker.pickImage(source: ImageSource.camera);
     if (picked != null) {
-      context.read<HomeProvider>().addImage(picked);
+      context.read<ReviewProvider>().addImage(picked);
     }
   }
 
@@ -266,7 +266,7 @@ class _ReviewState extends State<Review> {
               Navigator.pop(context);
 
               // 3. Bersihkan state
-              context.read<HomeProvider>().clearImages();
+              context.read<ReviewProvider>().clearImages();
               _controller.clear();
             },
             child: const Text("OK"),
