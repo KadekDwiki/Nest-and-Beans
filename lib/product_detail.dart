@@ -290,31 +290,39 @@ class _ProductDetailState extends State<ProductDetail> {
                 children: [
                   // Avatar and Username
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const CircleAvatar(
-                        child: Icon(Icons.person, color: Colors.white),
-                        backgroundColor: Colors.grey,
+                      Row(
+                        children: [
+                          const CircleAvatar(
+                            child: Icon(Icons.person, color: Colors.white),
+                            backgroundColor: Colors.grey,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            review.user,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 10),
-                      Text(
-                        review.user,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(width: 140),
-                      RatingBarIndicator(
-                        rating: review.rating,
-                        itemBuilder: (context, _) =>
-                            const Icon(Icons.star, color: Colors.amber),
-                        itemCount: 5,
-                        itemSize: 20,
-                      ),
-                      const SizedBox(width: 5),
-                      Text(
-                        '${review.rating}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                        ),
+                      Row(
+                        children: [
+                          RatingBarIndicator(
+                            rating: review.rating,
+                            itemBuilder: (context, _) =>
+                                const Icon(Icons.star, color: Colors.amber),
+                            itemCount: 5,
+                            itemSize: 20,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            '${review.rating}',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
