@@ -1,20 +1,41 @@
-import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart' show XFile;
+// import 'package:flutter/material.dart';
+// import 'package:image_picker/image_picker.dart' show XFile;
+
+// class HomeProvider extends ChangeNotifier {
+//   String? imagePath;
+
+//   /// todo-gallery-04: create a image variable so save image information
+//   XFile? imageFile;
+
+//   void setImagePath(String? value) {
+//     imagePath = value;
+//     notifyListeners();
+//   }
+
+//   /// todo-gallery-04-02: create a function to save a value
+//   void setImageFile(XFile? value) {
+//     imageFile = value;
+//     notifyListeners();
+//   }
+// }
+
+// home_provider.dart
+import 'dart:io';
+import 'package:flutter/foundation.dart';
+import 'package:image_picker/image_picker.dart';
 
 class HomeProvider extends ChangeNotifier {
-  String? imagePath;
+  List<File> _imageFiles = [];
 
-  /// todo-gallery-04: create a image variable so save image information
-  XFile? imageFile;
+  List<File> get imageFiles => _imageFiles;
 
-  void setImagePath(String? value) {
-    imagePath = value;
+  void addImage(XFile file) {
+    _imageFiles.add(File(file.path));
     notifyListeners();
   }
 
-  /// todo-gallery-04-02: create a function to save a value
-  void setImageFile(XFile? value) {
-    imageFile = value;
+  void clearImages() {
+    _imageFiles.clear();
     notifyListeners();
   }
 }
