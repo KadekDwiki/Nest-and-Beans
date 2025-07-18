@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 // import 'package:flutter/foundation.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:nest_and_beans/provider/home_provider.dart';
@@ -18,6 +19,7 @@ class Review extends StatefulWidget {
 
 class _ReviewState extends State<Review> {
   final _controller = TextEditingController();
+  double _rating = 0;
 
   @override
   void dispose() {
@@ -40,19 +42,72 @@ class _ReviewState extends State<Review> {
         backgroundColor: colorscheme.primary,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
+
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ElevatedButton.icon(
-              onPressed: () => _showUploadOptions(context),
-              icon: const Icon(Icons.upload),
-              label: const Text("Upload Gambar"),
+            // Heading review
+            Container(
+              margin: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 15.0,
+              ),
+              child: const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Bagaimana minumanmu?",
+                  textAlign: TextAlign.start,
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+
+            // Rating
+            Container(
+              margin: const EdgeInsets.symmetric(
+                horizontal: 15.0,
+                vertical: 10.0,
+              ),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: RatingBar.builder(
+                  initialRating: _rating,
+                  minRating: 0.5,
+                  allowHalfRating: true,
+                  itemCount: 5,
+                  itemSize: 65.0,
+                  itemBuilder: (context, _) =>
+                      const Icon(Icons.star, color: Colors.amber),
+                  onRatingUpdate: (rating) {
+                    setState(() {
+                      _rating = rating;
+                    });
+                  },
+                ),
+              ),
             ),
 
             const SizedBox(height: 16),
 
+            // Heading photo
+            Container(
+              margin: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 15.0,
+              ),
+              child: const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Tambahkan Foto",
+                  textAlign: TextAlign.start,
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+
+            // Photo upload
             if (imageFiles.isNotEmpty)
               Wrap(
                 spacing: 10,
@@ -69,22 +124,80 @@ class _ReviewState extends State<Review> {
                     .toList(),
               ),
 
-            const SizedBox(height: 24),
+            const SizedBox(height: 10),
 
-            TextField(
-              controller: _controller,
-              maxLines: 5,
-              decoration: const InputDecoration(
-                labelText: 'Tulis ulasan...',
-                border: OutlineInputBorder(),
+            // Button to upload photo
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 16.0),
+              alignment: Alignment.centerLeft,
+              child: ElevatedButton.icon(
+                onPressed: () => _showUploadOptions(context),
+                icon: const Icon(Icons.upload),
+                label: const Text("Upload Gambar"),
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            // Review text
+            Container(
+              margin: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 15.0,
+              ),
+              child: const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Berikan Ulasanmu",
+                  textAlign: TextAlign.start,
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+
+            // Text Input
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: TextField(
+                controller: _controller,
+                maxLines: 5,
+                decoration: const InputDecoration(
+                  labelText: 'Tulis ulasan...',
+                  alignLabelWithHint:
+                      true, // label tetap di atas untuk multi-line
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                  ),
+                ),
               ),
             ),
 
             const SizedBox(height: 20),
 
-            ElevatedButton(
-              onPressed: _submitReview,
-              child: const Text("Kirim Ulasan"),
+            Container(
+              margin: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 15.0,
+              ),
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: _submitReview,
+                icon: const Icon(Icons.send, color: Colors.white),
+                label: const Text(
+                  "Kirim Ulasan",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
