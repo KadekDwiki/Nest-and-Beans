@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:nest_and_beans/model/product.dart';
 import 'package:nest_and_beans/product_detail.dart';
 import 'package:video_player/video_player.dart';
+import 'package:nest_and_beans/purchase_history.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +31,14 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNav(),
+      bottomNavigationBar: CustomBottomNav(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+      ),
     );
   }
 }
@@ -660,23 +675,123 @@ class _VideoShowcaseSectionState extends State<VideoShowcaseSection> {
 
 
 
-class CustomBottomNav extends StatelessWidget {
-  const CustomBottomNav({super.key});
+class CustomBottomNav extends StatefulWidget {
+  final int currentIndex;
+  final Function(int) onTap;
+  
+  const CustomBottomNav({
+    super.key,
+    this.currentIndex = 0,
+    required this.onTap,
+  });
 
   @override
+  State<CustomBottomNav> createState() => _CustomBottomNavState();
+}
+
+class _CustomBottomNavState extends State<CustomBottomNav> {
+  @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      selectedItemColor: const Color(0xFF005E2E),
-      unselectedItemColor: Colors.grey,
-      type: BottomNavigationBarType.fixed,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.receipt_long),
-          label: 'Pesanan',
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 8,
+            offset: const Offset(0, -2),
+          ),
+        ],
+      ),
+      child: BottomNavigationBar(
+        currentIndex: widget.currentIndex,
+        onTap: (index) {
+          widget.onTap(index);
+          
+          // Navigasi ke halaman yang sesuai
+          if (index == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const PurchaseHistory(),
+              ),
+            );
+          }
+        },
+        selectedItemColor: const Color(0xFF005E2E),
+        unselectedItemColor: Colors.grey.shade600,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        selectedLabelStyle: const TextStyle(
+          fontWeight: FontWeight.w600,
+          fontSize: 12,
         ),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Akun'),
-      ],
+        unselectedLabelStyle: const TextStyle(
+          fontWeight: FontWeight.w400,
+          fontSize: 12,
+        ),
+        items: [
+          BottomNavigationBarItem(
+            icon: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: widget.currentIndex == 0 
+                    ? const Color(0xFF005E2E).withOpacity(0.1)
+                    : Colors.transparent,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(
+                widget.currentIndex == 0 
+                    ? Icons.home_rounded 
+                    : Icons.home_outlined,
+                size: 24,
+              ),
+            ),
+            activeIcon: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: const Color(0xFF005E2E).withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Icon(
+                Icons.home_rounded,
+                size: 24,
+              ),
+            ),
+            label: 'Beranda',
+          ),
+          BottomNavigationBarItem(
+            icon: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: widget.currentIndex == 1 
+                    ? const Color(0xFF005E2E).withOpacity(0.1)
+                    : Colors.transparent,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(
+                widget.currentIndex == 1 
+                    ? Icons.shopping_bag_rounded 
+                    : Icons.shopping_bag_outlined,
+                size: 24,
+              ),
+            ),
+            activeIcon: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: const Color(0xFF005E2E).withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Icon(
+                Icons.shopping_bag_rounded,
+                size: 24,
+              ),
+            ),
+            label: 'Pesanan',
+          ),
+        ],
+      ),
     );
   }
 }
