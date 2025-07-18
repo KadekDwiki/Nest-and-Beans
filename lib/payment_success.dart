@@ -147,21 +147,22 @@ class PaymentSuccessScreen extends StatefulWidget {
 }
 
 class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
-  // Variabel untuk menyimpan file gambar yang diunggah dari galeri
+  // variabel untuk menyimpan file
   File? _buktiBayar;
 
   Future<void> _pickImage() async {
-    // Membuat instance dari ImagePicker untuk memilih gambar
+    // instance dari ImagePicker
     final picker = ImagePicker();
 
-    // Membuka galeri untuk memilih gambar
+    // buka galeri
     final pickedImage = await picker.pickImage(source: ImageSource.gallery);
 
-    // Jika pengguna memilih gambar (tidak batal)
+    // kalo pengguna memilih gambar (tidak batal)
     if (pickedImage != null) {
       setState(() {
-        // Menyimpan file gambar yang dipilih ke dalam variabel _buktiBayar
-        _buktiBayar = File(pickedImage.path);
+        _buktiBayar = File(
+          pickedImage.path,
+        ); // menyimpan file gambar yang dipilih ke dalam variabel _buktiBayar
       });
     }
   }
@@ -220,40 +221,34 @@ class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
               ),
               const SizedBox(height: 30),
 
-              // Tombol upload dengan ikon upload dan label
+              // Tombol upload BARU
               ElevatedButton.icon(
-                onPressed:
-                    _pickImage, // Ketika tombol ditekan, jalankan fungsi _pickImage
-                icon: const Icon(Icons.upload), // Ikon upload di sebelah kiri
-                label: const Text(
-                  "Upload Bukti Pembayaran",
-                ), // Teks pada tombol
+                onPressed: _pickImage,
+                icon: const Icon(Icons.upload),
+                label: const Text("Upload Bukti Pembayaran"),
               ),
 
               const SizedBox(height: 10),
 
-              // Jika sudah ada gambar yang dipilih (tidak null)
+              // jika sudah ada gambar yang dipilih (tidak null)
               if (_buktiBayar != null)
                 Column(
                   children: [
-                    // Teks label "Bukti pembayaran"
                     const Text(
                       "Bukti pembayaran:",
                       style: TextStyle(fontSize: 14),
                     ),
-                    // Spasi antara teks dan gambar
                     const SizedBox(height: 5),
-                    // Menampilkan gambar yang telah dipilih user
                     Image.file(
-                      _buktiBayar!, // Menggunakan tanda seru karena sudah dicek tidak null
-                      width: 200, // Atur lebar gambar menjadi 200 piksel
+                      // menampilkan gambar yang telah dipilih user
+                      _buktiBayar!, // pake tanda seru karna dicek null
+                      width: 200, // lebar gambar jd 200 piksel
                     ),
                   ],
                 ),
 
               const SizedBox(height: 30),
 
-              // 🔍 Tombol Lihat Detail
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
