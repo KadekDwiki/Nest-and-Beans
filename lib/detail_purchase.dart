@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '/Model/purchase.dart';
+import 'package:nest_and_beans/Model/purchase.dart';
+import 'package:nest_and_beans/review.dart';
 
 class DetailPurchase extends StatelessWidget {
   final Purchase purchase;
@@ -8,6 +9,7 @@ class DetailPurchase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorscheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -15,7 +17,7 @@ class DetailPurchase extends StatelessWidget {
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: const Color(0xFF185221),
+        backgroundColor: colorscheme.primary,
 
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -37,13 +39,14 @@ class DetailPurchase extends StatelessWidget {
             const SizedBox(height: 4),
 
             Divider(color: getStatusColor(purchase.status), thickness: 2),
+
             const SizedBox(height: 4),
 
             Text(
               'ORDER ID : #${purchase.id}',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 14,
-                color: Color(0xFF185221),
+                color: colorscheme.primary,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -89,7 +92,7 @@ class DetailPurchase extends StatelessWidget {
 
                       const SizedBox(height: 2),
                       Text(
-                        '${purchase.product.description}',
+                        purchase.product.description,
                         style: const TextStyle(fontSize: 10),
                       ),
                     ],
@@ -141,13 +144,38 @@ class DetailPurchase extends StatelessWidget {
                 ),
                 Text(
                   'Rp ${purchase.totalPrice.toStringAsFixed(0)}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF185221),
+                    color: colorscheme.primary,
                   ),
                 ),
               ],
+            ),
+
+            const SizedBox(height: 16),
+
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: colorscheme.primary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => Review(purchase: purchase)),
+                );
+              },
+              child: const Text(
+                'Beri Ulasan',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import '/Model/purchase.dart';
-import 'detail_purchase.dart';
+import 'package:nest_and_beans/Model/purchase.dart';
+import 'package:nest_and_beans/detail_purchase.dart';
 
 class PurchaseHistory extends StatelessWidget {
   const PurchaseHistory({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final colorscheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF185221),
+        backgroundColor: colorscheme.primary,
         centerTitle: true,
         title: const Text(
           'Riwayat Pemesanan',
@@ -32,7 +33,7 @@ class PurchaseHistory extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.15),
+                  color: Color.fromRGBO(128, 128, 128, 0.15),
                   spreadRadius: 1,
                   blurRadius: 5,
                   offset: const Offset(0, 3),
@@ -66,12 +67,12 @@ class PurchaseHistory extends StatelessWidget {
                         );
                       },
                       child: Row(
-                        children: const [
+                        children: [
                           Text(
                             "Lihat Detail",
                             style: TextStyle(
                               fontSize: 12,
-                              color: Color(0xFF185221),
+                              color: colorscheme.primary,
                             ),
                           ),
 
@@ -80,7 +81,7 @@ class PurchaseHistory extends StatelessWidget {
                           Icon(
                             Icons.arrow_forward_ios,
                             size: 12,
-                            color: Color(0xFF185221),
+                            color: colorscheme.primary,
                           ),
                         ],
                       ),
@@ -112,7 +113,7 @@ class PurchaseHistory extends StatelessWidget {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF185221),
+                        backgroundColor: colorscheme.primary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
@@ -143,7 +144,7 @@ class PurchaseHistory extends StatelessWidget {
 Color getStatusColor(PurchaseStatus status) {
   switch (status) {
     case PurchaseStatus.berhasil:
-      return Color(0xFF185221);
+      return Color.fromARGB(255, 33, 133, 48);
     case PurchaseStatus.gagal:
       return Colors.red;
     case PurchaseStatus.pending:

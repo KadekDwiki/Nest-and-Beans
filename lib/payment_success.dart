@@ -10,7 +10,6 @@ class PaymentSuccessScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
     final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
@@ -52,12 +51,12 @@ class PaymentSuccessScreen extends StatelessWidget {
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
             const SizedBox(height: 5),
-            const Text(
+            Text(
               'Nest and Beans',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF185221),
+                color: colorscheme.primary,
               ),
             ),
             const SizedBox(height: 50),
