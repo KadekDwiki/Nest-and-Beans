@@ -122,6 +122,7 @@ class _ChooseVoucherPageState extends State<ChooseVoucherPage> {
         setState(() {
           selectedVoucher = value!;
         });
+        Navigator.pop(context, selectedVoucher);
       },
       title: Row(
         children: [

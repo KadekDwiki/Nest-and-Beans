@@ -127,6 +127,8 @@ class _ProductDetailState extends State<ProductDetail> {
                 //           MaterialPageRoute(builder: (context) => OrderPage()),
                 //         );
                 //       },
+
+                // membuat data orderan dinamis || dwiki
                 onPressed: selectedSize == null || !product.isAvailable
                     ? null
                     : () {
