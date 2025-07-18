@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+// import provider packages
 import 'package:provider/provider.dart';
 import 'package:nest_and_beans/provider/home_provider.dart';
+import 'package:nest_and_beans/providers/cart_provider.dart';
+
+// import gogle fonts package
 import 'package:google_fonts/google_fonts.dart';
-// import 'package:nest_and_beans/Model/product.dart';
+
+// import pages & models
 import 'package:nest_and_beans/splash_screen.dart';
+// import 'package:nest_and_beans/Model/product.dart';
 // import 'package:nest_and_beans/product_detail.dart';
 
 void main() {
@@ -13,7 +20,10 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark),
   );
-  runApp(MyApp());
+
+  runApp(
+    ChangeNotifierProvider(create: (_) => CartProvider(), child: const MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
