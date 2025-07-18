@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nest_and_beans/Model/product.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:nest_and_beans/model/product.dart';
 import 'package:nest_and_beans/product_detail.dart';
 import 'package:video_player/video_player.dart';
@@ -326,7 +324,6 @@ class _ListProdukState extends State<ListProduk> {
   void _initializeCategories() {
     Set<String> uniqueCategories = productLists.map((product) => product.category).toSet();
     categories = ['Our Signature', ...uniqueCategories.toList()];
-    
      selectedCategory = 'Our Signature';
     
     _filterProducts();
