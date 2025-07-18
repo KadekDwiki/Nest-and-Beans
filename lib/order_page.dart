@@ -76,7 +76,6 @@ class OrderPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      _buildRoundedButton(context: context, text: 'Pilih'),
                     ],
                   ),
                 ),
@@ -124,7 +123,7 @@ class OrderPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Pick Up',
+                                  'Toko Nest & Beans Jimbaran',
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,

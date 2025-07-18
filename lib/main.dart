@@ -5,13 +5,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nest_and_beans/splash_screen.dart';
 //import 'package:nest_and_beans/product_detail.dart';
 
+import 'package:provider/provider.dart';
+import 'package:nest_and_beans/providers/cart_provider.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark),
   );
-  runApp(const MyApp());
+
+  runApp(
+    ChangeNotifierProvider(create: (_) => CartProvider(), child: const MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
