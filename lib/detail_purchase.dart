@@ -169,7 +169,9 @@ class DetailPurchase extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => Review(purchase: purchase)),
+                  MaterialPageRoute(
+                    builder: (context) => Review(purchase: purchase),
+                  ),
                 );
               },
               child: const Text(
