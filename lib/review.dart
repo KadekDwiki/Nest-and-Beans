@@ -182,12 +182,13 @@ class _ReviewState extends State<Review> {
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: _submitReview,
-                icon: const Icon(Icons.send, color: Colors.white),
+                // icon: const Icon(Icons.send, color: Colors.white),
                 label: const Text(
                   "Kirim Ulasan",
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
+                    fontSize: 16,
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
