@@ -22,6 +22,9 @@ class _ProductDetailState extends State<ProductDetail> {
     final double totalPrice = product.price * quantity;
     final colorscheme = Theme.of(context).colorScheme;
 
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isWideScreen = screenWidth > 600;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -37,135 +40,50 @@ class _ProductDetailState extends State<ProductDetail> {
             Navigator.pop(context);
           },
         ),
-        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Gambar produk
-            Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.asset(
-                  product.imageCover,
-                  height: 440,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            SizedBox(
-              height: 100,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: product.imagesSlider.map((imagePath) {
-                  return Padding(
-                    padding: const EdgeInsets.all(4.0),
+        child: isWideScreen
+            ? Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 1,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(imagePath),
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.asset(
+                        product.imageCover,
+                        height: 400,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  );
-                }).toList(),
-              ),
-            ),
-
-            // Nama dan deskripsi
-            Text(
-              product.name,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              product.description,
-              style: const TextStyle(color: Colors.grey),
-            ),
-            const SizedBox(height: 12),
-
-            // Harga
-            Text(
-              'Rp ${product.price.toStringAsFixed(0)}',
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            const Divider(height: 10, color: Colors.grey),
-            const SizedBox(height: 20),
-
-            // Pilihan ukuran
-            const Text(
-              'Pilih Ukuran Cup:',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: product.sizes.map((size) {
-                return Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Radio<String>(
-                      value: size,
-                      groupValue: selectedSize,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedSize = value!;
-                        });
-                      },
+                  ),
+                  const SizedBox(width: 24),
+                  Expanded(
+                    flex: 2,
+                    child: _buildProductDetailContent(product),
+                  ),
+                ],
+              )
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.asset(
+                        product.imageCover,
+                        height: 440,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                    Text(size),
-                    const SizedBox(width: 50), // Jarak antar pilihan
-                  ],
-                );
-              }).toList(),
-            ),
-            const SizedBox(height: 20),
-            const Divider(height: 10, color: Colors.grey),
-            const SizedBox(height: 20),
-
-            // Pilihan ukuran
-            const Text(
-              'Pilih Topping:',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: product.toppings.map((topping) {
-                return CheckboxListTile(
-                  title: Text(topping),
-                  value: selectedToppings.contains(topping),
-                  onChanged: (bool? isChecked) {
-                    setState(() {
-                      if (isChecked == true) {
-                        selectedToppings.add(topping);
-                      } else {
-                        selectedToppings.remove(topping);
-                      }
-                    });
-                  },
-                  controlAffinity: ListTileControlAffinity.leading,
-                );
-              }).toList(),
-            ),
-
-            // Notifikasi jika tidak tersedia
-            if (!product.isAvailable)
-              const Text(
-                'Tidak tersedia saat ini',
-                style: TextStyle(color: Colors.red),
+                  ),
+                  const SizedBox(height: 20),
+                  _buildProductDetailContent(product),
+                ],
               ),
-
-            const SizedBox(
-              height: 80,
-            ), // Untuk memberi jarak agar tombol tidak tertutup
-          ],
-        ),
       ),
-
-      // Tombol beli di bawah
       bottomNavigationBar: SafeArea(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -176,7 +94,6 @@ class _ProductDetailState extends State<ProductDetail> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Tombol + -
               Row(
                 children: [
                   IconButton(
@@ -200,8 +117,6 @@ class _ProductDetailState extends State<ProductDetail> {
                   ),
                 ],
               ),
-
-              // Tombol beli
               ElevatedButton(
                 onPressed: selectedSize == null || !product.isAvailable
                     ? null
@@ -209,9 +124,7 @@ class _ProductDetailState extends State<ProductDetail> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) {
-                              return OrderPage();
-                            },
+                            builder: (context) => OrderPage(),
                           ),
                         );
                       },
@@ -224,13 +137,105 @@ class _ProductDetailState extends State<ProductDetail> {
                 ),
                 child: Text(
                   'Tambah - Rp ${totalPrice.toStringAsFixed(0)}',
-                  style: TextStyle(fontSize: 18.0, color: Colors.white),
+                  style: const TextStyle(fontSize: 18.0, color: Colors.white),
                 ),
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildProductDetailContent(Product product) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 100,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: product.imagesSlider.map((imagePath) {
+              return Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(imagePath),
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+        const SizedBox(height: 20),
+        Text(
+          product.name,
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          product.description,
+          style: const TextStyle(color: Colors.grey),
+        ),
+        const SizedBox(height: 12),
+        Text(
+          'Rp ${product.price.toStringAsFixed(0)}',
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 20),
+        const Divider(height: 10, color: Colors.grey),
+        const SizedBox(height: 20),
+        const Text(
+          'Pilih Ukuran Cup:',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 8),
+        Wrap(
+          spacing: 20,
+          children: product.sizes.map((size) {
+            return Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Radio<String>(
+                  value: size,
+                  groupValue: selectedSize,
+                  onChanged: (value) {
+                    setState(() {
+                      selectedSize = value!;
+                    });
+                  },
+                ),
+                Text(size),
+              ],
+            );
+          }).toList(),
+        ),
+        const SizedBox(height: 20),
+        const Divider(height: 10, color: Colors.grey),
+        const SizedBox(height: 20),
+        const Text(
+          'Pilih Topping:',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        Column(
+          children: product.toppings.map((topping) {
+            return CheckboxListTile(
+              title: Text(topping),
+              value: selectedToppings.contains(topping),
+              onChanged: (bool? isChecked) {
+                setState(() {
+                  if (isChecked == true) {
+                    selectedToppings.add(topping);
+                  } else {
+                    selectedToppings.remove(topping);
+                  }
+                });
+              },
+              controlAffinity: ListTileControlAffinity.leading,
+            );
+          }).toList(),
+        ),
+        const SizedBox(height: 80),
+      ],
     );
   }
 }
