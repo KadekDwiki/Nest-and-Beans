@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:nest_and_beans/provider/home_provider.dart';
+// import 'package:provider/provider.dart';
+// import 'package:nest_and_beans/provider/home_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nest_and_beans/Model/product.dart';
 //import 'package:nest_and_beans/splash_screen.dart';
@@ -13,12 +13,13 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark),
   );
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => HomeProvider(),
-      child: const MaterialApp(home: MyApp()),
-    ),
-  );
+  runApp(MyApp());
+  // runApp(
+  //   ChangeNotifierProvider(
+  //     create: (context) => HomeProvider(),
+  //     child: const MaterialApp(home: MyApp()),
+  //   ),
+  // );
 }
 
 class MyApp extends StatelessWidget {
