@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'purchase_history.dart';
+import 'purchase_history.dart'; //riwayat pembelian
 import '/Model/purchase.dart';
 
 class OrderReadyScreen extends StatelessWidget {
-  final Purchase purchase;
+  final Purchase purchase; //properti buat menyimpan data pembelian yang diterima dari halaman sebelumnya
 
   const OrderReadyScreen({super.key, required this.purchase});
 
@@ -24,7 +24,7 @@ class OrderReadyScreen extends StatelessWidget {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start, //rata kiri
           children: [
             Center(
               child: Column(
@@ -44,7 +44,7 @@ class OrderReadyScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   Container(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16), //semua sisi
                     decoration: BoxDecoration(
                       color: Colors.green[50],
                       borderRadius: BorderRadius.circular(10),
@@ -84,17 +84,18 @@ class OrderReadyScreen extends StatelessWidget {
             ),
             const SizedBox(height: 14),
             ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: ClipRRect(
+              contentPadding: EdgeInsets.zero, //padding default(biar lebih rapat ke kiri/kanan)
+              leading: ClipRRect( //gambar dikiri
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
-                  purchase.product.imageCover,
+                  purchase.product.imageCover, //diambil dari product yang ada di purchase
                   width: 50,
                   height: 50,
                   fit: BoxFit.cover,
                 ),
               ),
               title: Text(purchase.product.name),
+              //subtitle menampilkan size dan topping jika ada
               subtitle: Text(
                 'Size: ${purchase.selectedSize}'
                 '${purchase.product.toppings.isNotEmpty ? " | ${purchase.product.toppings.join(', ')}" : ""}',
