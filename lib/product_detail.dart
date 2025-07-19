@@ -155,7 +155,8 @@ class _ProductDetailState extends State<ProductDetail> {
                 // membuat data orderan dinamis || dwiki
                 onPressed: selectedSize == null || !product.isAvailable
                     ? null
-                    : () {
+                    : () async {
+                        await _audioPlayer.stop();
                         final cart = context.read<CartProvider>();
 
                         final item = CartItem(
