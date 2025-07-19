@@ -5,6 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:nest_and_beans/model/cart_item.dart';
 import 'package:nest_and_beans/providers/cart_provider.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class ProductDetail extends StatefulWidget {
   final Product product;
@@ -19,6 +20,29 @@ class _ProductDetailState extends State<ProductDetail> {
   String? selectedSize;
   int quantity = 1;
   List<String> selectedToppings = [];
+
+  late final AudioPlayer _audioPlayer;
+  bool isMuted = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _audioPlayer = AudioPlayer();
+    _playAudio();
+  }
+
+  Future<void> _playAudio() async {
+    await _audioPlayer.setReleaseMode(ReleaseMode.loop);
+    await _audioPlayer.play(
+      AssetSource('audio/lofi-girl-lofi-hiphop-beats-328177.mp3'),
+    );
+  }
+
+  @override
+  void dispose() {
+    _audioPlayer.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -127,6 +151,8 @@ class _ProductDetailState extends State<ProductDetail> {
                 //           MaterialPageRoute(builder: (context) => OrderPage()),
                 //         );
                 //       },
+
+                // membuat data orderan dinamis || dwiki
                 onPressed: selectedSize == null || !product.isAvailable
                     ? null
                     : () {

@@ -64,8 +64,8 @@ class CartProvider extends ChangeNotifier {
   }
 
   // Voucher (versi sederhana: langsung assign nominal diskon)
-  void applyVoucher(AppVoucher v) {
-    _voucher = v;
+  void applyVoucher(AppVoucher voucher) {
+    _voucher = voucher;
     notifyListeners();
   }
 
@@ -78,8 +78,10 @@ class CartProvider extends ChangeNotifier {
   double get subtotal => _items.fold(0, (sum, i) => sum + i.linePrice);
 
   double get discount => _voucher?.discountAmount ?? 0;
-
-  double get total => (subtotal - discount).clamp(0, double.infinity);
+  double get serviceFee => 3000;
+  double get packagingFee => 7000;
+  double get total => ((subtotal - discount) + (serviceFee + packagingFee))
+      .clamp(0, double.infinity);
 
   bool _listEquals(List<String> a, List<String> b) {
     if (a.length != b.length) return false;

@@ -1,40 +1,46 @@
 import 'package:flutter/material.dart';
 
 class ChoosePaymentMethod extends StatefulWidget {
-  const ChoosePaymentMethod({super.key});
+  final String? initialMethod;
+  const ChoosePaymentMethod({super.key, required this.initialMethod});
 
   @override
   State<ChoosePaymentMethod> createState() => _ChoosePaymentMethodState();
 }
 
 class _ChoosePaymentMethodState extends State<ChoosePaymentMethod> {
-  String selectedMethod = 'QRIS';
+  late String? selectedMethod;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedMethod = widget.initialMethod ?? 'Cash';
+  }
 
   final List<Map<String, dynamic>> connectedPayments = [
     {'name': 'QRIS', 'icon': 'assets/images/qris.png'},
     {
-      'name': 'Kartu Kredit',
-      'icon': 'assets/images/credit_card.png',
-      'desc':
-          'Minimal pembayaran Rp 10.000 dan mendukung Kartu Berlogo Visa, Mastercard dan JCB',
-    },
-    {
       'name': 'Dana',
       'icon': 'assets/images/dana.png',
-      'saldo': 'Rp 2.615',
-      'saldoColor': Colors.red,
+      'saldo': 'Rp 2.615.000',
+      'saldoColor': Colors.blue,
     },
     {
       'name': 'ShopeePay',
       'icon': 'assets/images/shopeepay.png',
-      'saldo': 'Rp 468',
-      'saldoColor': Colors.red,
+      'saldo': 'Rp 468.000',
+      'saldoColor': Colors.blue,
     },
     {
       'name': 'OVO',
       'icon': 'assets/images/ovo.png',
-      'saldo': 'Rp 0',
-      'saldoColor': Colors.red,
+      'saldo': 'Rp 100.000',
+      'saldoColor': Colors.blue,
+    },
+    {
+      'name': 'Cash',
+      'icon': 'assets/images/cash.png',
+      'desc': 'Pembayaran tunai saat pengantaran',
     },
   ];
 
@@ -42,12 +48,7 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod> {
     {
       'name': 'Gopay',
       'icon': 'assets/images/gopay.png',
-      'action': 'Aktifkan Sekarang',
-    },
-    {
-      'name': 'blu',
-      'icon': 'assets/images/blu.png',
-      'action': 'Aktifkan Sekarang',
+      'action': 'Hubungkan sekarang',
     },
   ];
 
@@ -133,6 +134,7 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod> {
         setState(() {
           selectedMethod = value!;
         });
+        Navigator.pop(context, selectedMethod);
       },
       title: Row(
         children: [
