@@ -24,9 +24,9 @@ class _HomePageState extends State<HomePage> {
           children: const [
             PromoCarouselHeader(),
             SizedBox(height: 60),
-            ListProduk(),
-            SizedBox(height: 30),
             VideoShowcaseSection(), 
+            SizedBox(height: 30),
+            ListProduk(),
             SizedBox(height: 60),
           ],
         ),
